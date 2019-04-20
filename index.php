@@ -16,7 +16,7 @@
 
 
   <div class="content mdl-color--white mdl-shadow--2dp ">
-      <h2>Votre solde</h2>
+      <h2>On vous doit</h2>
       <h4 class="solde">$57.67</h4>
   </div>
 
