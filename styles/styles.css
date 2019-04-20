@@ -14,8 +14,12 @@
  * limitations under the License.
  */
 
-html, body {
-  font-family: 'Roboto', 'Helvetica', sans-serif;
+ html, body {
+  font-family: 'Dosis', sans-serif !important;
+}
+
+p{
+  font-size: 20px;
 }
 .demo-avatar {
   width: 48px;
@@ -40,32 +44,60 @@ html, body {
 }
 /* END iOS Safari specific workaround */
 .demo-drawer .mdl-menu .mdl-menu__item {
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 .demo-drawer-header {
-  box-sizing: border-box;
+
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
   padding: 16px;
-  height: 151px;
+
+}
+
+.logo{
+ 
+  background: #007575;
+  padding: 20px 20px 40px 20px;
+}
+.logo>h1{
+  font-family: 'Dosis', sans-serif;
+  font-size: 45px;
+  margin: 0px;
+}
+.logo>h6{
+
+  margin: 0px;
+}
+
+.demo-drawer-header>h1{
+  font-size: 1vw;
 }
 .demo-avatar-dropdown {
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  position: relative;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
+  padding: 15px;
 }
 
 .demo-navigation {
-  flex-grow: 1;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
 }
 .demo-layout .demo-navigation .mdl-navigation__link {
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
   display: flex !important;
-  flex-direction: row;
-  align-items: center;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   color: rgba(255, 255, 255, 0.56);
   font-weight: 500;
 }
@@ -84,7 +116,9 @@ html, body {
 }
 
 .demo-charts {
-  align-items: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 .demo-chart:nth-child(1) {
   color: #ACEC00;
@@ -100,9 +134,15 @@ html, body {
 }
 .demo-graphs {
   padding: 16px 32px;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-align-items: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
 }
 /* TODO: Find a proper solution to have the graphs
  * not float around outside their container in IE10/11.
@@ -123,8 +163,12 @@ _:-ms-input-placeholder, :root .demo-graph {
 }
 
 .demo-cards {
-  align-items: flex-start;
-  align-content: flex-start;
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-align-content: flex-start;
+      -ms-flex-line-pack: start;
+          align-content: flex-start;
 }
 .demo-cards .demo-separator {
   height: 32px;
@@ -169,7 +213,65 @@ _:-ms-input-placeholder, :root .demo-graph {
 }
 .demo-options .mdl-card__actions {
   height: 64px;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
   box-sizing: border-box;
-  align-items: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+
+.fixed {
+  position: fixed;
+  display: block;
+  right: 0;
+  bottom: 0;
+  margin-right: 40px;
+  margin-bottom: 25px;
+  z-index: 900;
+}
+
+footer {
+  bottom: 0;
+  width: 100%;
+
+}
+
+.card>h1{
+
+  font-family: 'Dosis', sans-serif !important;
+
+}
+
+.contents{
+  
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: space-between;
+  width: 100%;
+}
+
+.content{
+  font-family: 'Dosis', sans-serif !important;
+  background: #37474F;
+  margin: 5px;
+  flex: 1;
+  margin: 14px;
+  padding: 0px 20px 0px 20px;
+  
+}
+
+.content>h1,h2{
+  font-family: 'Dosis', sans-serif !important;
+}
+
+
+.solde{
+  color: #0b9034;
+    font-size: 30px;
 }
