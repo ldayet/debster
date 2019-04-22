@@ -1,13 +1,19 @@
 <?php include("includes/header.php"); ?>
 
-<?php include("includes/navbar.php"); ?>
+<?php include("includes/navbar.php"); 
+
+$link = bdd_connexion($link, $login, $mdp, $bdd);
+
+
+
+?>
 
 <div class="contents">
 
   <div class="content mdl-color--white mdl-shadow--2dp ">
       <h2>Inviter un ami</h2>
       <div class="content-main">
-      <form action="#" class="">
+      <form action="add_friend.php">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
           <input class="mdl-textfield__input" type="text" id="sample3">
           <label class="mdl-textfield__label" for="sample3">Saisir une adresse email</label>
