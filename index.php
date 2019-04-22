@@ -2,9 +2,6 @@
 
 <?php include("includes/navbar.php"); 
 
-$link = bdd_connexion($link, $login, $mdp, $bdd);
-
-
 
 ?>
 
