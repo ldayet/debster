@@ -2,7 +2,10 @@
 
     <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
     
-    <div class="mdl-layout__header-row">
+    <div class="mdl-layout__header-row" 
+   style=" color: white;
+    background-color: #263238;"
+>
 
         <span class="mdl-layout-title"><?php echo basename($_SERVER["SCRIPT_FILENAME"], '.php') ?> </span>
 
@@ -33,3 +36,22 @@
 
 <main class="mdl-layout__content mdl-color--grey-100">
 <div class="mdl-grid demo-content">
+<div class="container">
+
+
+<?php 
+
+      if(isset($_SESSION['flash'])){
+        foreach($_SESSION['flash'] as $type => $message){
+           echo"<div class='alert alert-dismissible alert-$type'> <button type='button' class='close' data-dismiss='alert'>&times;</button>$message </div>";
+          
+        }
+        unset($_SESSION['flash']);
+      }
+
+?>
+
+
+
+
+

@@ -4,12 +4,12 @@
 
 
 
-<div class="content">  
+
 
 <?php
 
 
-$nomErr = $prenomErr = $emailErr = $ageErr = $mdpErr = $mdpcErr = $pseudoErr = "";
+$nomErr = $prenomErr = $emailErr = $ddnErr = $mdpErr = $mdpcErr = $pseudoErr = "";
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $prenom = $_POST['prenom'];
   $pseudo = $_POST['pseudo'];
   $email = $_POST['email'];
-  $age = $_POST['age'];
+  $ddn = $_POST['ddn'];
   $mdp = $_POST['mdp'];
   $mdpc = $_POST['mdpc'];
   $mysqli  = bdd_connexion(DB_SERVER , DB_USER, DB_PASSWORD, DB_DATABASE) ;
@@ -48,8 +48,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $emailErr = "Sorry, that email is taken. Try another";
     $errors++;
   }
-  if (empty($_POST["age"])) {
-    $ageErr = "Champ obligatoire";
+  
+  if (empty($_POST["ddn"])) {
+    $ddnErr = "Champ obligatoire";
     $errors++;
   }
   if (empty($_POST["mdp"])) {
@@ -64,9 +65,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           $errors++;
   }
 
-  if ($errors == 0) {
+  if (!$errors) {
 
-    ajouter_membre($mysqli,$nom,$prenom,$pseudo,$email,$age,$mdp);
+   ajouter_membre($mysqli,$nom,$prenom,$pseudo,$email,$ddn,$mdp);
+
+   $_SESSION['flash']['success'] = "Vous etes maintenant connecté." ;
+    header('Location: register.php');
+
     
 
 }
@@ -78,6 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
+<div class="content">  
 
 
 <form class="form-horizontal" autocomplete="on" method="POST" action="">
@@ -118,14 +124,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <div class="form-group">
-      <label for="textArea">Age</label>
-      <input type="text" class="form-control  <?php if($ageErr){echo "is-invalid";} ?> " name="age" placeholder="Entrer votre age">
-      <?php if($ageErr): ?>
-      <div class="invalid-feedback"><?php echo $ageErr ; ?></div>
+      <label for="textArea">Date de naissance</label><div class="valid-feedback">mois/jour/année</div>
+      <input class="form-control <?php if($dnnErr){echo "is-invalid";} ?> " type="date" value="<?php echo date('Y-m-d'); ?>" id="example-date-input" name="ddn">
+      <div class="valid-feedback">mois/jour/année</div>
+      <?php if($ddnErr): ?>
+      <div class="invalid-feedback"><?php echo $ddnErr ; ?></div>
       <?php endif; ?>
     </div>
-
-
 
     <div class="form-group">
       <label for="textArea">Mot de passe</label>

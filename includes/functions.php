@@ -341,12 +341,10 @@ function input($link,$string){
 
 function ajouter_membre($mysqli,$nom,$prenom,$pseudo,$email,$age,$mdp){
 
-  $requete = $mysqli->prepare("INSERT INTO `membres`( `nom_m`, `prenom_m`, `pseudo_m`, `mdp_m`, `email_m`) VALUES (?, ?, ?, ?, ?)");
-  $requete->bind_param("sssss", $nom,$prenom,$pseudo,$mdp,$email);
+  $requete = $mysqli->prepare("INSERT INTO `membres`( `nom_m`, `prenom_m`, `pseudo_m`, `ddn_m` ,`mdp_m`, `email_m`) VALUES (?, ?, ?, ?,?, ?)");
+  $requete->bind_param("ssssss", $nom,$prenom,$pseudo,$ddn,$mdp,$email);
   $requete->execute();
-
-
-
+  
 }
 
 
@@ -362,5 +360,21 @@ function email_dans_bdd($bdd, $email){
        }
     }
 	return false;
+}
+
+function mpd_m_avec_pseudo_m($bdd, $pseudo)
+{
+	if(pseudo_dans_bdd($bdd, $pseudo) == false)
+	{
+		return false;
+	}
+	$requete = mysqli_query($bdd, "SELECT * FROM membres");
+	while ($donnees = mysqli_fetch_assoc($requete))
+    {
+       if  ($donnees['pseudo_m'] == $pseudo)
+       {
+       		return $donnees['mdp_m'];
+       }
+    }
 }
 ?>
