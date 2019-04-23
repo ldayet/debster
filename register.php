@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    ajouter_membre($mysqli,$nom,$prenom,$pseudo,$email,$ddn,$mdp);
 
    $_SESSION['flash']['success'] = "Vous etes maintenant connecté." ;
-    header('Location: register.php');
+    header('Location: login.php');
 
     
 

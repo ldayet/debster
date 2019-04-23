@@ -43,6 +43,9 @@ if ($errors == 0) {
     $mdp_t = mpd_m_avec_pseudo_m($mysqli, $pseudo);
 
     if ($mdp == $mdp_t) {
+
+        $_SESSION['user'] =  get_user_by_pseudo($mysqli, $pseudo);
+        
         $_SESSION['flash']['success'] = "Vous etes maintenant connecté." ;
         header('Location: index.php');
     }else{
