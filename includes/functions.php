@@ -377,4 +377,20 @@ function mpd_m_avec_pseudo_m($bdd, $pseudo)
        }
     }
 }
+
+function get_user_by_pseudo($mysqli, $pseudo)
+{
+	if(pseudo_dans_bdd($mysqli, $pseudo) == false)
+	{
+		return "utilisateur introuvable";
+	}
+	$requete = mysqli_query($mysqli, "SELECT * FROM membres");
+	while ($donnees = mysqli_fetch_assoc($requete))
+    {
+       if  ($donnees['pseudo_m'] == $pseudo)
+       {
+       		return $donnees;
+       }
+    }
+}
 ?>

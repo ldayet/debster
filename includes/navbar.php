@@ -17,20 +17,28 @@
       <h1>DEBSTER</h1>
       <h6>Your favorite app</h6>
     </div>
+
+    <?php if (isset($_SESSION['user'])) : ?>   
   <header class="demo-drawer-header">
 
-    <img src="images/user.jpg" class="demo-avatar">
+    <img src=<?php echo $_SESSION['user']['image_m']; ?> class="demo-avatar">
     <div class="demo-avatar-dropdown">
-      <span>FULL NAME</span>
-   
-
-
-    </div>
+      <span><?php echo $_SESSION['user']['nom_m']." ".$_SESSION['user']['prenom_m'] ; ?></span>
+       </div>
   </header>
+  <?php endif; ?>
   <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-    <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">dashboard</i>Tableau de bord</a>
-    <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">attach_money</i>Depenses</a>
-    <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">sentiment_satisfied_alt</i>Amis</a>
+  <?php if (isset($_SESSION['user'])) : ?> 
+
+  <a class="mdl-navigation__link" href="index.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">dashboard</i>Tableau de bord</a>
+  <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">face</i>Mon profil</a>
+  <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">attach_money</i>Depenses</a>
+  <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">sentiment_satisfied_alt</i>Amis</a>
+
+  <a class="mdl-navigation__link" href="logout.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">not_interested</i>Se déconnecter</a>
+
+  <?php endif; ?>
+ 
   </nav>
 </div>
 
