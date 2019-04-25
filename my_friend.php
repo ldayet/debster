@@ -27,13 +27,5 @@
   </div>
 </div>
 
-<form action="login.php">
 
-
-<button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect mdl-button--colored fixed">
-    <i class="material-icons"> <a href="login.php">add</a></i>
-    
-</button>
-
-</form>
 <?php include("includes/footer.php"); ?>
