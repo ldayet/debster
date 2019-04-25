@@ -155,6 +155,38 @@ function liste_amis($bdd, $id)
     }
 }
 
+function liste_amis1($bdd, $id, $i)
+{
+  $requete = mysqli_query($bdd, "SELECT * FROM membres");
+  while ($donnees = mysqli_fetch_assoc($requete))
+    {
+       if  ($donnees['id_m'] == $id)
+       {
+          #on recupere la chaine de charactere de la colonne "amis"
+          $char_amis = $donnees['amis_m'];
+       }
+    }
+    #on convertie cette chaine de caractère en tableau
+    $tab_amis = explode("|", $char_amis);
+    return $tab_amis[$i];
+}
+
+function nb_amis($bdd, $id)
+{
+  $requete = mysqli_query($bdd, "SELECT * FROM membres");
+  while ($donnees = mysqli_fetch_assoc($requete))
+    {
+       if  ($donnees['id_m'] == $id)
+       {
+          #on recupere la chaine de charactere de la colonne "amis"
+          $char_amis = $donnees['amis_m'];
+       }
+    }
+    #on convertie cette chaine de caractère en tableau
+    $tab_amis = explode("|", $char_amis);
+    return sizeof($tab_amis);
+}
+
 #une fonction qui me permet d'ajouter un ami (mail ou pseudo ou id)
 function ajouter_ami($bdd, $id_moi, $info_ami){
   $requete = mysqli_query($bdd, "SELECT * FROM membres");
