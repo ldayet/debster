@@ -3,6 +3,8 @@
 <?php include("includes/navbar.php"); ?>
 
 
+<?php for_not_logged(); ?>
+
 
 <div class="content">
 
@@ -47,9 +49,9 @@ if ($errors == 0) {
         $_SESSION['user'] =  get_user_by_pseudo($mysqli, $pseudo);
         
         $_SESSION['flash']['success'] = "Vous etes maintenant connecté." ;
-        header('Location: index.php');
+        header('Location: dashboard.php');
     }else{
-      $_SESSION['flash']['warning'] = "Mot de passe incorrecte." ;
+      $_SESSION['flash']['warning'] = "Mot de passe incorrect." ;
         header('Location: login.php');
     }
 }

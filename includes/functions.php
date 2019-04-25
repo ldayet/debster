@@ -1,5 +1,6 @@
 <?php
 
+session_start() ;
 include("config.php");
 
 # Fonction qui permet de se connecter a une base de donnnée
@@ -348,6 +349,15 @@ function input($link,$string){
   return $variable ;
 }
 
+function ajouter_membre($mysqli,$nom,$prenom,$pseudo,$ddn,$mdp,$email){
+
+  $requete = $mysqli->prepare("INSERT INTO `membres`( `nom_m`, `prenom_m`, `pseudo_m`, `ddn_m` ,`mdp_m`, `email_m`) VALUES (?, ?, ?, ?,?, ?)");
+  $requete->bind_param("ssssss", $nom,$prenom,$pseudo,$ddn,$mdp,$email);
+  $requete->execute();
+  
+}
+
+
 # Vérifie que le mail est dans la base de donnée
 function email_dans_bdd($bdd, $email){
 
@@ -395,197 +405,26 @@ function get_user_by_pseudo($mysqli, $pseudo)
     }
 }
 
-# Fonction qui permet d'afficher la liste des dettes par ami
-function liste_dette_ami($bdd, $id_moi, $id_ami){
-  $requete = mysqli_query($bdd, "SELECT * FROM transactions");
-  while ($donnees = mysqli_fetch_assoc($requete))
-  {
-    if  ($donnees['id_src'] == $id_moi && $donnees['id_dest'] == $id_ami && $donnees['statut_t'] == 'ouvert' && $donnees['id_group'] == NULL)
-    {
-      echo $donnees['montant_t'];
-      echo "\n";
-      echo $donnees['date_t'];
-      echo "\n";
-      echo $donnees['motif_t'];
-    }
-  }
+function for_logged(){
+  if(!isset($_SESSION)){session_start(); }
+
+  if(!isset($_SESSION['user'])){
+      $_SESSION['flash']['warning'] = "VEUILLEZ VOUS CONNECTER" ;
+      header('Location:login.php');
+   }
+
 }
 
-# Fonction qui permet d'afficher la liste des creance par ami
-function liste_creance_ami($bdd, $id_moi, $id_ami){
-  $requete = mysqli_query($bdd, "SELECT * FROM transactions");
-  while ($donnees = mysqli_fetch_assoc($requete))
-  {
-    if  ($donnees['id_src'] == $id_ami && $donnees['id_dest'] == $id_moi && $donnees['statut_t'] == 'ouvert' && $donnees['id_group'] == NULL)
-    {
-      echo $donnees['montant_t'];
-      echo "\n";
-      echo $donnees['date_t'];
-      echo "\n";
-      echo $donnees['motif_t'];
-    }
-  }
+function for_not_logged(){
+  if(!isset($_SESSION)){ session_start();}
+
+  if(isset($_SESSION['user'])){  
+     $_SESSION['flash']['warning'] = "VOUS ETES DEJA CONNECTÉ" ;
+     header('Location:dashboard.php');
+
+  }  
+
 }
 
-/*# Fonction qui permet d'afficher la liste de mes dette par groupe
-#ATTENTION NON TESTE
-function liste_dette_groupe($bdd, $id_moi){
-  $requete = mysqli_query($bdd, "SELECT * FROM transactions");
-  while ($donnees = mysqli_fetch_assoc($requete))
-  {
-    if  ($donnees['id_src'] == $id_moi && $donnees['statut_t'] == 'ouvert' && $donnees['id_group'] != NULL)
-    {
-      echo $donnees['montant_t'];
-      echo "\n"
-      echo $donnees['date_t'];
-      echo "\n"
-      echo $donnees['motif_t']
-      echo "\n"
-      $groupe = $donnees['id_group']
-      $req = "SELECT `nom_g` FROM groupes WHERE `groupes`.`id_g` = $groupe";
-      $nomgroupe = mysqli_query($bdd, $req);
-      echo $nomgroupe;
-    }
-  }
-}
 
-# Fonction qui permet d'afficher la liste de mes creances par groupe
-#ATTENTION NON TESTE
-function liste_creance_groupe($bdd, $id_moi){
-  $requete = mysqli_query($bdd, "SELECT * FROM transactions");
-  while ($donnees = mysqli_fetch_assoc($requete))
-  {
-    if  ($donnees['id_dest'] == $id_moi && $donnees['statut_t'] == 'ouvert' && $donnees['id_group'] != NULL)
-    {
-      echo $donnees['montant_t'];
-      echo "\n"
-      echo $donnees['date_t'];
-      echo "\n"
-      echo $donnees['motif_t']
-      echo "\n"
-      $groupe = $donnees['id_group']
-      $req = "SELECT `nom_g` FROM groupes WHERE `groupes`.`id_g` = $groupe";
-      $nomgroupe = mysqli_query($bdd, $req);
-      echo $nomgroupe;
-    }
-  }
-}
-
-# Fonction qui affiche la liste des transactions par groupe
-function liste_creance_groupe($bdd, $id_group){
-  $requete = mysqli_query($bdd, "SELECT * FROM transactions");
-  while ($donnees = mysqli_fetch_assoc($requete))
-  {
-    if  ($donnees['statut_t'] == 'ouvert' && $donnees['id_group'] == $id_group)
-    {
-      echo $donnees['montant_t'];
-      echo "\n"
-      echo $donnees['date_t'];
-      echo "\n"
-      echo $donnees['motif_t']
-      echo "\n"
-      $groupe = $donnees['id_group']
-      $req = "SELECT `nom_g` FROM groupes WHERE `groupes`.`id_g` = $groupe";
-      $nomgroupe = mysqli_query($bdd, $req);
-      echo $nomgroupe;
-    }
-  }
-}*/
-
-# Fonction qui permet d'afficher la liste de toutes mes transactions
-
-# Fonction pour créer un groupe
-function ajout_groupe($bdd, $nom, $description){
-  $requete = "INSERT INTO `groupes` VALUES (NULL,'$nom','','$description')";
-  mysqli_query($bdd,$requete);
-}
-
-# Fonction pour ajouter un membre au groupe
-function ajout_membre_groupe($bdd, $id_group, $info_ami){
-  $requete = mysqli_query($bdd, "SELECT * FROM membres");
-  # on recupere l'id de l'ami a ajouter selon le pseudo ou le mail
-  while ($donnees = mysqli_fetch_assoc($requete))
-  {
-    #on regarde si on ajoute avec le pseudo et on récupère l'id
-    if  ($donnees['pseudo_m'] == $info_ami)
-    {   
-      $info_ami = $donnees['id_m'];
-    }
-    #on regarde si on ajoute par mail et on recupere l'id
-    if  ($donnees['email_m'] == $info_ami)
-    {   
-      $info_ami = $donnees['id_m'];
-    } 
-  }
-  $requete1 = mysqli_query($bdd, "SELECT * FROM groupes");
-  while ($donnees1 = mysqli_fetch_assoc($requete1))
-  {
-      # on recupere notre liste d'ami
-     if  ($donnees1['id_g'] == $id_group)
-     {
-      #on recupere la chaine de charactere de la colonne "amis"
-      $char_group = $donnees1['membres_g'];
-     }
-  }
-  $tab_group = explode("|", $char_group);
-  $i = 0;
-  while ($i<sizeof($tab_group))
-  {
-    if($tab_group[$i] == $info_ami){
-      echo "cette personne fait deja partie du groupe";
-      $i = $i+1;
-      return 0;
-    }
-    $i = $i+1;
-  }
-  $req = "UPDATE `groupes` SET `membres_g` = '$char_amis|$info_ami' WHERE `groupes`.`id_g` = $id_group";
-  mysqli_query($bdd, $req);
-  return 1;
-}
-
-# Fonction pour supprimer un membre de groupe (uniquement si aucune transaction en cours)
-function supprimer_membre_groupe($bdd, $id_groupe, $info_ami){
-  $requete = mysqli_query($bdd, "SELECT * FROM membres");
-  # on recupere l'id de l'ami a ajouter selon le pseudo ou le mail
-  while ($donnees = mysqli_fetch_assoc($requete))
-  {
-    #on regarde si on ajoute avec le pseudo et on récupère l'id
-    if  ($donnees['pseudo_m'] == $info_ami)
-    {   
-      $info_ami = $donnees['id_m'];
-    }
-    #on regarde si on ajoute par mail et on recupere l'id
-    if  ($donnees['email_m'] == $info_ami)
-    {   
-      $info_ami = $donnees['id_m'];
-    } 
-  }
-  $requete1 = mysqli_query($bdd, "SELECT * FROM groupes");
-  while ($donnees1 = mysqli_fetch_assoc($requete1))
-  {
-      # on recupere notre liste d'ami
-     if  ($donnees1['id_g'] == $id_groupe)
-     {
-      #on recupere la chaine de charactere de la colonne "amis"
-      $char_group = $donnees1['membres_g'];
-     }
-  }
-  $tab_group = explode("|", $char_group);
-  $i = 0;
-  while ($i<sizeof($tab_group))
-  {
-    if($tab_group[$i] == $info_ami){
-      $tab_group[$i] = 0;
-      unset($tab_group[$i]);
-      $i = $i+1;
-      return 0;
-    }
-    $req = "UPDATE `groupes` SET `membres_g` = '|$tab_group[$i]' WHERE `groupes`.`id_g` = $id_groupe";
-  mysqli_query($bdd, $req);
-    $i = $i+1;
-  }
-  return 1;
-}
-
-# Fonction pour ajouter une dépense de groupe
 ?>
