@@ -32,8 +32,8 @@
 
   <a class="mdl-navigation__link" href="dashboard.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">dashboard</i>Tableau de bord</a>
   <a class="mdl-navigation__link" href="profil.php0"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">face</i>Mon profil</a>
-  <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">attach_money</i>Depenses</a>
-  <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">sentiment_satisfied_alt</i>Amis</a>
+  <a class="mdl-navigation__link" href="dettes.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">attach_money</i>Dettes et créances</a>
+  <a class="mdl-navigation__link" href="amis.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">sentiment_satisfied_alt</i>Amis</a>
 
   <a class="mdl-navigation__link" href="logout.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">not_interested</i>Se déconnecter</a>
 
