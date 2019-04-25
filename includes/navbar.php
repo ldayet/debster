@@ -30,15 +30,19 @@
   <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
   <?php if (isset($_SESSION['user'])) : ?> 
 
-  <a class="mdl-navigation__link" href="index.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">dashboard</i>Tableau de bord</a>
-  <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">face</i>Mon profil</a>
+  <a class="mdl-navigation__link" href="dashboard.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">dashboard</i>Tableau de bord</a>
+  <a class="mdl-navigation__link" href="profil.php0"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">face</i>Mon profil</a>
   <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">attach_money</i>Depenses</a>
   <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">sentiment_satisfied_alt</i>Amis</a>
 
   <a class="mdl-navigation__link" href="logout.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">not_interested</i>Se déconnecter</a>
 
+  <?php else: ?>
+  <a class="mdl-navigation__link" href="index.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">dashboard</i>Accueil</a>
+  <a class="mdl-navigation__link" href="login.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">face</i>Se connecter</a>
+  <a class="mdl-navigation__link" href="register.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">face</i>S'inscrire</a>
+  <a class="mdl-navigation__link" href="contact.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">attach_money</i>Contact</a>
   <?php endif; ?>
- 
   </nav>
 </div>
 

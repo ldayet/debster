@@ -1,5 +1,6 @@
 <?php
 
+session_start() ;
 include("config.php");
 
 # Permet de recuperer l'id avec le pseudo
@@ -339,7 +340,7 @@ function input($link,$string){
   return $variable ;
 }
 
-function ajouter_membre($mysqli,$nom,$prenom,$pseudo,$email,$age,$mdp){
+function ajouter_membre($mysqli,$nom,$prenom,$pseudo,$ddn,$mdp,$email){
 
   $requete = $mysqli->prepare("INSERT INTO `membres`( `nom_m`, `prenom_m`, `pseudo_m`, `ddn_m` ,`mdp_m`, `email_m`) VALUES (?, ?, ?, ?,?, ?)");
   $requete->bind_param("ssssss", $nom,$prenom,$pseudo,$ddn,$mdp,$email);
@@ -393,4 +394,27 @@ function get_user_by_pseudo($mysqli, $pseudo)
        }
     }
 }
+
+function for_logged(){
+  if(!isset($_SESSION)){session_start(); }
+
+  if(!isset($_SESSION['user'])){
+      $_SESSION['flash']['warning'] = "VEUILLEZ VOUS CONNECTER" ;
+      header('Location:login.php');
+   }
+
+}
+
+function for_not_logged(){
+  if(!isset($_SESSION)){ session_start();}
+
+  if(isset($_SESSION['user'])){  
+     $_SESSION['flash']['warning'] = "VOUS ETES DEJA CONNECTÉ" ;
+     header('Location:dashboard.php');
+
+  }  
+
+}
+
+
 ?>
