@@ -85,35 +85,7 @@ function mdp_m_avec_id_m($bdd, $id)
     }
 }
 
-#une fonction qui affiche la liste d'amis
-function liste_amis($bdd, $id)
-{
-	$requete = mysqli_query($bdd, "SELECT * FROM membres");
-	while ($donnees = mysqli_fetch_assoc($requete))
-    {
-       if  ($donnees['id_m'] == $id)
-       {
-       		#on recupere la chaine de charactere de la colonne "amis"
-       		$char_amis = $donnees['amis_m'];
-       }
-    }
-    #on convertie cette chaine de caractère en tableau
-    $tab_amis = explode("|", $char_amis);
-    $i = 0;
-    while ($i<sizeof($tab_amis))
-    {
-    	$prenom_amis = prenom_m_avec_id_m($bdd, $tab_amis[$i]);
-    	$nom_amis = nom_m_avec_id_m($bdd, $tab_amis[$i]);
-    	echo $prenom_amis;
-      echo "\n";
-    	echo $nom_amis;
-      echo "\n";
-      echo balance_ami($bdd, $id, $tab_amis[$i]);
-      echo "\n";
-    	#rajouter balance groupe
-    	$i = $i +1;
-    }
-}
+
 
 #une fonction qui me permet d'ajouter un ami (mail ou pseudo ou id)
 function ajouter_ami($bdd, $id_moi, $info_ami){
@@ -201,7 +173,7 @@ function dette_ami($bdd, $idmoi, $idami)
   $dette = 0;
   while ($donnees = mysqli_fetch_assoc($requete))
   {
-    if  ($donnees['id_src'] == $idmoi && $donnees['id_dest'] == $idami && $donnees['statut_t'] == 'ouvert' && $donnees['id_group'] == NULL)
+    if  ($donnees['id_src'] == $idmoi && $donnees['id_dest'] == $idami && $donnees['statut_t'] == 'ouvert' && $donnees['id_group'] == 0)
     {
       $dette = $dette + $donnees['montant_t'];
     }
@@ -216,7 +188,7 @@ function creance_ami($bdd, $idmoi, $idami)
   $creance = 0;
   while ($donnees = mysqli_fetch_assoc($requete))
   {
-    if  ($donnees['id_src'] == $idami && $donnees['id_dest'] == $idmoi && $donnees['statut_t'] == 'ouvert' && $donnees['id_group'] == NULL)
+    if  ($donnees['id_src'] == $idami && $donnees['id_dest'] == $idmoi && $donnees['statut_t'] == 'ouvert' && $donnees['id_group'] == 0)
     {
       $creance = $creance + $donnees['montant_t'];
     }
@@ -301,9 +273,9 @@ function pseudo_dans_bdd($bdd, $pseudo)
 
 
 # Fonction qui permet de se connecter a une base de donnnée
-function bdd_connexion($link, $login, $mdp, $bdd)
+function bdd_connexion()
 {
-  $base = new mysqli($link, $login, $mdp, $bdd);
+  $base = new mysqli(DB_SERVER , DB_USER, DB_PASSWORD, DB_DATABASE);
   
 	if ($base->connect_errno) 
 	{
@@ -312,26 +284,7 @@ function bdd_connexion($link, $login, $mdp, $bdd)
 	return $base;
 }
 
-# TEST en local
-#$bdd = bdd_connexion('localhost', 'root', '','eisen');
-#echo "\n";
-#echo id_m_avec_pseudo_m($bdd, 'lulud33');
-#echo "\n";
-#echo pseudo_m_avec_id_m($bdd, 1);
-#echo "\n";
-#echo liste_amis($bdd, 1);
-#echo "\n";
-#echo dette_ami($bdd, 2, 1);
-#echo "\n";
-#echo creance_ami($bdd, 2, 1);
-#echo "\n";
-#echo balance_ami($bdd, 2, 1);
-#ajout_transaction($bdd, 2, 1, 10, NULL, "resto");
-#echo ajouter_ami($bdd,2,'lulud33');
-#echo supprimer_ami($bdd,2,'mimolie');
-
-
-
+#escaping sql injections
 function input($link,$string){
 
   $variable = mysqli_real_escape_string($link,$string);
@@ -340,6 +293,7 @@ function input($link,$string){
   return $variable ;
 }
 
+#ajouter un membre 
 function ajouter_membre($mysqli,$nom,$prenom,$pseudo,$ddn,$mdp,$email){
 
   $requete = $mysqli->prepare("INSERT INTO `membres`( `nom_m`, `prenom_m`, `pseudo_m`, `ddn_m` ,`mdp_m`, `email_m`) VALUES (?, ?, ?, ?,?, ?)");
@@ -416,5 +370,72 @@ function for_not_logged(){
 
 }
 
+#une fonction qui affiche la liste d'amis
+function liste_amis($bdd, $id)
+{
+	$requete = mysqli_query($bdd, "SELECT * FROM membres");
+	while ($donnees = mysqli_fetch_assoc($requete))
+    {
+       if  ($donnees['id_m'] == $id)
+       {
+       		#on recupere la chaine de charactere de la colonne "amis"
+       		$char_amis = $donnees['amis_m'];
+       }
+    }
+    #on convertie cette chaine de caractère en tableau
+    $tab_amis = explode("|", $char_amis);
+    $i = 0;
+    echo "<table class='table table-striped'><thead><tr><th scope='col'>Nom</th><th scope='col'>Prénom</th><th scope='col'>Vous doit</th><th scope='col'>Vous lui devez</th><th scope='col'>Balance</th></tr></thead>";
+    echo "<tbody>";
+    while ($i<sizeof($tab_amis))
+    {
+    	$prenom_amis = prenom_m_avec_id_m($bdd, $tab_amis[$i]);
+    	$nom_amis = nom_m_avec_id_m($bdd, $tab_amis[$i]);
+    	echo "<tr><td>".$nom_amis."</td><td>".$prenom_amis."</td><td>".dette_ami($bdd, $id, $tab_amis[$i])."</td><td>".creance_ami($bdd, $id, $tab_amis[$i])."</td><td>".-balance_ami($bdd, $id, $tab_amis[$i])."</td></tr>";
+    	$i = $i +1;
+    }
+    echo "</tbody></table>";
+
+}
+ 
+function check_box_amis($bdd, $id){
+  $requete = mysqli_query($bdd, "SELECT * FROM membres");
+while ($donnees = mysqli_fetch_assoc($requete))
+{
+   if  ($donnees['id_m'] == $id)
+   {
+           #on recupere la chaine de charactere de la colonne "amis"
+           $char_amis = $donnees['amis_m'];
+   }
+}
+#on convertie cette chaine de caractère en tableau
+$tab_amis = explode("|", $char_amis);
+$i = 0;
+while ($i<sizeof($tab_amis))
+{
+    $prenom_amis = prenom_m_avec_id_m($bdd, $tab_amis[$i]);
+    $nom_amis = nom_m_avec_id_m($bdd, $tab_amis[$i]);
+    echo "<div class='custom-control custom-radio'>";
+    echo "<input type='radio' id='".$tab_amis[$i]."' name='".$tab_amis[$i]."' class='custom-control-input'>";
+    echo "<label class='custom-control-label' for='".$tab_amis[$i]."'>".$prenom_amis." ".$nom_amis."</label>";
+    echo "</div>";
+    $i = $i +1;
+}
+}
+
+
+
+function liste_dettes($bdd,$id){
+  $requete = mysqli_query($bdd, "SELECT * FROM transactions WHERE ");
+	while ($donnees = mysqli_fetch_assoc($requete))
+    {
+       if  ($donnees['id_m'] == $id)
+       {
+       		#on recupere la chaine de charactere de la colonne "amis"
+       		$char_amis = $donnees['amis_m'];
+       }
+    }
+
+}
 
 ?>
