@@ -3,7 +3,7 @@
 <?php include("includes/navbar.php"); ?>
 
 
-
+<?php for_not_logged(); ?>
 
 
 <?php
@@ -22,7 +22,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $ddn = $_POST['ddn'];
   $mdp = $_POST['mdp'];
   $mdpc = $_POST['mdpc'];
+
   $mysqli  = bdd_connexion(DB_SERVER , DB_USER, DB_PASSWORD, DB_DATABASE) ;
+
   $errors = 0;
 
 
@@ -67,10 +69,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   if (!$errors) {
 
-   ajouter_membre($mysqli,$nom,$prenom,$pseudo,$email,$ddn,$mdp);
+   ajouter_membre($mysqli,$nom,$prenom,$pseudo,$ddn,$mdp,$email);
+   
 
    $_SESSION['flash']['success'] = "Vous etes maintenant connecté." ;
-    header('Location: login.php');
+   $_SESSION['user'] =  get_user_by_pseudo($mysqli, $pseudo);
+   header('Location: dashboard.php');
 
     
 
