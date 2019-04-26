@@ -217,7 +217,7 @@ function dette_ami($bdd, $idmoi, $idami)
   $dette = 0;
   while ($donnees = mysqli_fetch_assoc($requete))
   {
-    if  ($donnees['id_src'] == $idmoi && $donnees['id_dest'] == $idami && $donnees['statut_t'] == 'ouvert' && $donnees['id_group'] == 0)
+    if  ($donnees['id_src'] == $idmoi && $donnees['id_dest'] == $idami && $donnees['statut_t'] == 'ouvert' && $donnees['id_group'] == NULL)
     {
       $dette = $dette + $donnees['montant_t'];
     }
@@ -232,7 +232,7 @@ function creance_ami($bdd, $idmoi, $idami)
   $creance = 0;
   while ($donnees = mysqli_fetch_assoc($requete))
   {
-    if  ($donnees['id_src'] == $idami && $donnees['id_dest'] == $idmoi && $donnees['statut_t'] == 'ouvert' && $donnees['id_group'] == 0)
+    if  ($donnees['id_src'] == $idami && $donnees['id_dest'] == $idmoi && $donnees['statut_t'] == 'ouvert' && $donnees['id_group'] == NULL)
     {
       $creance = $creance + $donnees['montant_t'];
     }
