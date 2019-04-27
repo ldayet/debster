@@ -225,6 +225,21 @@ function dette_ami($bdd, $idmoi, $idami)
   return $dette;
 }
 
+#une fonction qui calcule mes dettes
+function dette_moi($bdd, $idmoi)
+{
+  $requete = mysqli_query($bdd, "SELECT * FROM transactions");
+  $dette = 0;
+  while ($donnees = mysqli_fetch_assoc($requete))
+  {
+    if  ($donnees['id_src'] == $idmoi && $donnees['statut_t'] == 'ouvert')
+    {
+      $dette = $dette + $donnees['montant_t'];
+    }
+  }
+  return $dette;
+}
+
 #une fonction qui calcule ce que cet ami me doit hors groupe
 function creance_ami($bdd, $idmoi, $idami)
 {
@@ -233,6 +248,21 @@ function creance_ami($bdd, $idmoi, $idami)
   while ($donnees = mysqli_fetch_assoc($requete))
   {
     if  ($donnees['id_src'] == $idami && $donnees['id_dest'] == $idmoi && $donnees['statut_t'] == 'ouvert' && $donnees['id_groupe'] == NULL)
+    {
+      $creance = $creance + $donnees['montant_t'];
+    }
+  }
+  return $creance;
+}
+
+#une fonction qui calcule mes creances
+function creance_moi($bdd, $idmoi)
+{
+  $requete = mysqli_query($bdd, "SELECT * FROM transactions");
+  $creance = 0;
+  while ($donnees = mysqli_fetch_assoc($requete))
+  {
+    if  ($donnees['id_dest'] == $idmoi && $donnees['statut_t'] == 'ouvert')
     {
       $creance = $creance + $donnees['montant_t'];
     }
