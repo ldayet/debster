@@ -51,9 +51,6 @@ if ($errors == 0) {
         header('Location: login.php');
     }
 }
-
-
-
 }
 ?>
 <form class="form-horizontal" autocomplete="on" method="POST" action="">

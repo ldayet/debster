@@ -11,7 +11,7 @@
 
 <?php 
 $bdd =bdd_connexion(DB_SERVER , DB_USER, DB_PASSWORD, DB_DATABASE);
-liste_amis($bdd, $_SESSION['user']['id_m'] );
+liste_amis($_SESSION['user']['id_m'] );
  ?>
 
 

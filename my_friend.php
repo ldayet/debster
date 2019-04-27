@@ -3,20 +3,22 @@
 <?php include("includes/navbar.php"); ?>
 
 <?php for_logged(); ?>
-<?php $mysqli  = bdd_connexion() ;
-$mon_id = $_SESSION['user']['id_m'];
-$id_ami = $_GET['id_ami'];?>
+
+<?php 
+$mon_id = get_session_id();
+$id_ami = $_GET['id_ami'];
+?>
 
 <div class="jumbotron">
   <h1 class="display-4">
     <center>
     <?php 
-    $image = image_m_avec_id_m($mysqli, $id_ami);
+    $image = image_m_avec_id_m($id_ami);
     echo "<img src=$image class='demo-avatar'>";
     echo "\n";
-    echo prenom_m_avec_id_m($mysqli, $id_ami);
+    echo prenom_m_avec_id_m($id_ami);
     echo "\n";
-    echo nom_m_avec_id_m($mysqli, $id_ami); 
+    echo nom_m_avec_id_m($id_ami); 
     ?>
     </center>
   </h1>
@@ -26,7 +28,7 @@ $id_ami = $_GET['id_ami'];?>
   <div class="card">
       <li class="list-group-item"><center>Total des créances : 
       <?php 
-      echo creance_ami($mysqli, $mon_id, $id_ami);
+      echo creance_ami($mon_id, $id_ami);
       ?>€
       </center></li>
       <table class="table">
@@ -74,7 +76,7 @@ $id_ami = $_GET['id_ami'];?>
   <div class="card">
       <li class="list-group-item"><center>Total des dettes : 
       <?php 
-      echo dette_ami($mysqli, $mon_id, $id_ami);
+      echo dette_ami($mon_id, $id_ami);
       ?>€
       </center></li>
       <table class="table">
@@ -97,7 +99,7 @@ $id_ami = $_GET['id_ami'];?>
               </td>
               <td>
                 <?php 
-                  echo $donnees['description'];
+                  echo $donnees['description_t'];
                 ?>
               </td>
               <td>
@@ -106,7 +108,7 @@ $id_ami = $_GET['id_ami'];?>
                 ?>
               </td>
               <td>
-                  <a href="#" onclick="rembourser_transaction($mysqli, $donnees['id_t'], 'remboursé')"><img src="images/checked.svg" height=10%></a>
+                  <a href="#" onclick="rembourser_transaction($donnees['id_t'], 'remboursé')"><img src="images/checked.svg" height=10%></a>
                   <a href="#"><img src="images/cancel.svg" height=10%></a>
               </td>
             </tr>
