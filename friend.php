@@ -57,7 +57,10 @@
 		  	}?>
 		  </td>
 		  <td class="mdl-data-table__cell--non-numeric">      	
-		  	<a href="#" onclick="supprimer_ami($mon_id, $id);"><img src="images/delete-button.svg" height=60%>
+		  	<?php 
+		  	echo "<a href=\"delete_friend.php?id_ami=$id\">";
+		  	echo '<img src="images/delete-button.svg" height=60%></a>';
+		  	echo "</a>";?>
 		  <?php $j=$j+1;?>
       </td>
   	  <?php } ?>
