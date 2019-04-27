@@ -17,16 +17,12 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
-
-  
-  
-  $mysqli  = bdd_connexion(DB_SERVER , DB_USER, DB_PASSWORD, DB_DATABASE) ;
-  $errors = 0;
+   $errors = 0;
 
   if (empty($_POST["pseudo"])) {
     $pseudoErr = "Champ obligatoire";
     $errors++;
-  }else if(!pseudo_dans_bdd($mysqli, $_POST["pseudo"])) {
+  }else if(!pseudo_dans_bdd($_POST["pseudo"])) {
           $pseudoErr = "Sorry, this username doesn't exist.";
           $errors++;
   }else{
@@ -42,11 +38,11 @@ if (empty($_POST["mdp"])) {
 
 if ($errors == 0) {
 
-    $mdp_t = mpd_m_avec_pseudo_m($mysqli, $pseudo);
+    $mdp_t = mpd_m_avec_pseudo_m($pseudo);
 
     if ($mdp == $mdp_t) {
 
-        $_SESSION['user'] =  get_user_by_pseudo($mysqli, $pseudo);
+        $_SESSION['user'] =  get_user_by_pseudo($pseudo);
         
         $_SESSION['flash']['success'] = "Vous etes maintenant connecté." ;
         header('Location: dashboard.php');

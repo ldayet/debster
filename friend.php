@@ -8,15 +8,7 @@
   <h1 class="display-4">Ma liste d'amis</h1>
 </div>
 
-<!-- Three Line List with secondary info and action -->
-<style>
-.demo-list-three {
-  width: 650px;
-}
 
-</style>
-
-<?php $mysqli  = bdd_connexion() ;?>
 
 
 
@@ -32,27 +24,27 @@
   </thead>
   <tbody>
   	  <?php 
-  	  $mon_id = $_SESSION['user']['id_m'];
-      $nb_amis = nb_amis($mysqli,$mon_id);
+  	  $mon_id = $id;
+      $nb_amis = nb_amis($mon_id);
       $j=0;
       while($j<$nb_amis){
-		  $id = liste_amis1($mysqli,$mon_id,$j); ?>
+		  $id = liste_amis1($mon_id,$j); ?>
     	  <tr>
 		  <td class="mdl-data-table__cell--non-numeric">
 		  	<?php 
-		  	$image = image_m_avec_id_m($mysqli, $id);
+		  	$image = image_m_avec_id_m($id);
 		  	echo "<img src=$image class='demo-avatar'>"; ?>
 		  </td>
 		  <td class="mdl-data-table__cell--non-numeric">
-		  	<?php echo nom_m_avec_id_m($mysqli, $id); ?>
+		  	<?php echo nom_m_avec_id_m($id); ?>
 		  </td>
 		  <td class="mdl-data-table__cell--non-numeric">
-		  	<?php echo prenom_m_avec_id_m($mysqli, $id); ?>
+		  	<?php echo prenom_m_avec_id_m($id); ?>
 		  </td>
 		  <td class="mdl-data-table__cell--non-numeric">
-		  	<?php echo balance_ami($mysqli, $mon_id, $id);
+		  	<?php echo balance_ami($mon_id, $id);
 		  	echo "\n";
-		  	$balance = balance_ami($mysqli, $mon_id, $id);
+		  	$balance = balance_ami($mon_id, $id);
 		  	if ($balance==0){
 		  		echo '<img src="images/equal.svg" height=60% />';
 		  	}
@@ -64,7 +56,7 @@
 		  	}?>
 		  </td>
 		  <td class="mdl-data-table__cell--non-numeric">      	
-		  	<a href="#" onclick="supprimer_ami($mysqli, $mon_id, $id);"><img src="images/delete-button.svg" height=60%>
+		  	<a href="#" onclick="supprimer_ami($mon_id, $id);"><img src="images/delete-button.svg" height=60%>
 		  <?php $j=$j+1;?>
       </td>
   	  <?php } ?>
