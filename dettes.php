@@ -102,7 +102,7 @@ $mon_id = $_SESSION['user']['id_m'];?>
               </td>
               <td>
                 <?php 
-                  echo $donnees['description'];
+                  echo $donnees['description_t'];
                 ?>
               </td>
               <td>
