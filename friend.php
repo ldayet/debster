@@ -5,7 +5,7 @@
 <?php for_logged(); ?>
 
 <div class="jumbotron">
-  <h1 class="display-4">Ma liste d'amis</h1>
+  <h1 class="display-4"><center>Ma liste d'amis</center></h1>
 </div>
 
 <!-- Three Line List with secondary info and action -->
@@ -34,20 +34,30 @@
   	  <?php 
   	  $mon_id = $_SESSION['user']['id_m'];
       $nb_amis = nb_amis($mysqli,$mon_id);
-      $j=0;
+      $j=1;
       while($j<$nb_amis){
 		  $id = liste_amis1($mysqli,$mon_id,$j); ?>
     	  <tr>
 		  <td class="mdl-data-table__cell--non-numeric">
+		  	
 		  	<?php 
+		  	echo "<a href=\"my_friend.php?id_ami=$id\">";
 		  	$image = image_m_avec_id_m($mysqli, $id);
-		  	echo "<img src=$image class='demo-avatar'>"; ?>
+		  	echo "<img src=$image class='demo-avatar'>"; 
+		  	echo "</a>";?>
+		  	
 		  </td>
 		  <td class="mdl-data-table__cell--non-numeric">
-		  	<?php echo nom_m_avec_id_m($mysqli, $id); ?>
+		  	<?php 
+		  	echo "<a href=\"my_friend.php?id_ami=$id\">";
+		  	echo nom_m_avec_id_m($mysqli, $id); 
+		  	echo "</a>";?>
 		  </td>
 		  <td class="mdl-data-table__cell--non-numeric">
-		  	<?php echo prenom_m_avec_id_m($mysqli, $id); ?>
+		  	<?php 
+		  	echo "<a href=\"my_friend.php?id_ami=$id\">";
+		  	echo prenom_m_avec_id_m($mysqli, $id); 
+		  	echo "</a>";?>
 		  </td>
 		  <td class="mdl-data-table__cell--non-numeric">
 		  	<?php echo balance_ami($mysqli, $mon_id, $id);
@@ -64,7 +74,7 @@
 		  	}?>
 		  </td>
 		  <td class="mdl-data-table__cell--non-numeric">      	
-		  	<a href="#" onclick="supprimer_ami($mysqli, $mon_id, $id);"><img src="images/delete-button.svg" height=60%>
+		  	<a href="#" onclick="supprimer_ami($mysqli, $mon_id, $id);"><img src="images/delete-button.svg" height=60%></a>
 		  <?php $j=$j+1;?>
       </td>
   	  <?php } ?>
