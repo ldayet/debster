@@ -5,7 +5,7 @@
 <?php for_logged(); ?>
 
 <div class="jumbotron">
-  <h1 class="display-4">Ma liste d'amis</h1>
+  <h1 class="display-4"><center>Ma liste d'amis</center></h1>
 </div>
 
 
@@ -31,6 +31,7 @@
 		  $id = liste_amis1($mon_id,$j); ?>
     	  <tr>
 		  <td class="mdl-data-table__cell--non-numeric">
+		  	
 		  	<?php 
 		  	$image = image_m_avec_id_m($id);
 		  	echo "<img src=$image class='demo-avatar'>"; ?>
