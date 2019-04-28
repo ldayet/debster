@@ -9,7 +9,7 @@ $id_ami = $_GET['id_ami'];?>
 
 <div class="alert alert-danger" role="alert">
   <h4 class="alert-heading">Attention!</h4>
-  <p>Etes vous sûr de vouloir supprimer <?php echo prenom_m_avec_id_m($mysqli, $id_ami); ?> de votre liste d'amis?</p>
+  <p>Etes vous sûr de vouloir supprimer <?php echo prenom_m_avec_id_m($id_ami); ?> de votre liste d'amis?</p>
   <hr>
   <p><button type="button" class="btn btn-outline-light">Oui</button> <button type="button" class="btn btn-outline-light">Non</button></p>
 </div>

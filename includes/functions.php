@@ -330,7 +330,7 @@ function balance_ami($id1, $id2){
 function ajout_transaction($id_src, $id_dest, $montant, $description){
   $bdd = bdd_connexion();
   $date =  date("Y-m-d");
-  $requete = "INSERT INTO `transactions` VALUES (NULL,'$date','$id_src','$montant',NULL,'$id_dest','ouvert','$description','0000-00-00','')";
+  $requete = "INSERT INTO `transactions` VALUES (NULL,'$date','$id_src','$montant',NULL,'$id_dest','ouvert','$description',NULL,NULL)";
   mysqli_query($bdd,$requete);
   mysqli_close($bdd);
 }
