@@ -17,7 +17,7 @@ $mon_id = $_SESSION['user']['id_m'];?>
   <div class="card">
       <li class="list-group-item"><center>Total de mes créances : 
       <?php 
-      echo creance_moi($mysqli, $mon_id);
+      echo creance_moi($mon_id);
       ?>€
       </center></li>
       <table class="table">
@@ -47,7 +47,7 @@ $mon_id = $_SESSION['user']['id_m'];?>
               </td>
               <td>
                 <?php 
-                  echo $donnees['description'];
+                  echo $donnees['description_t'];
                 ?>
               </td>
               <td>
@@ -72,7 +72,7 @@ $mon_id = $_SESSION['user']['id_m'];?>
   <div class="card">
       <li class="list-group-item"><center>Total de mes dettes : 
       <?php 
-      echo dette_moi($mysqli, $mon_id);
+      echo dette_moi($mon_id);
       ?>€
       </center></li>
       <table class="table">

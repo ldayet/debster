@@ -23,9 +23,9 @@
     <div class="card-body">
       <h5 class="card-title">SOLDE TOTAL</h5>
       
-      <p class="card-text">On vous doit : $40</p>
-      <p class="card-text">Vous devez : $10</p>
-      <p class="card-text">Solde : + $30</p>
+      <p class="card-text">On vous doit : $<?php echo creance_moi($id) ?></p>
+      <p class="card-text">Vous devez : $<?php echo dette_moi($id) ?></p>
+      <p class="card-text">Solde : <?php echo creance_moi($id)-dette_moi($id) ?></p>
             
       
 

@@ -3,9 +3,7 @@
 <?php include("includes/navbar.php"); ?>
 
 <?php for_logged(); ?>
-<?php $mysqli  = bdd_connexion() ;
-$mon_id = $_SESSION['user']['id_m'];
-$id_ami = $_GET['id_ami'];?>
+<?php $id_ami = $_GET['id_ami']; ?>
 
 <div class="alert alert-danger" role="alert">
   <h4 class="alert-heading">Attention!</h4>

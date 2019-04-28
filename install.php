@@ -1,13 +1,9 @@
-<?php include("includes/header.php"); ?>
+<?php include("includes/config.php"); ?>
+<?php
 
-<?php include("includes/navbar.php"); ?>
+$qDb = "CREATE DATABASE IF NOT EXISTS `heisenberg`";
 
-<?php 
-
-
-$qDb = "CREATE DATABASE IF NOT EXISTS `heisen`";
-
-$qSelDb = "USE heisen";
+$qSelDb = "USE heisenberg";
 
 $qTbgroupes = "CREATE TABLE IF NOT EXISTS `groupes` (
   `id_g` int(255) AUTO_INCREMENT NOT NULL  ,
@@ -44,14 +40,18 @@ $qTbmembres = "CREATE TABLE IF NOT EXISTS `membres` (
   PRIMARY KEY(`id_m`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 ";
 
-$qInitTbgroupes= "INSERT INTO `groupes` (`id_g`, `nom_g`, `membres_g`, `description`) VALUES ('1', 'heisenberg', '1|2|3|4', 'voyage')";
-$qInitTbgmembres2= "INSERT INTO `membres` (`id_m`, `image_m`, `nom_m`, `prenom_m`, `pseudo_m`, `ddn_m`, `mdp_m`, `email_m`, `amis_m`) VALUES ('2', 'none', 'jesse', 'pinkman', 'jesse', '666-06-7', 'azerty1', 'pinkman@enseirb.fr', '1')";
-$qInitTbtransactions ="INSERT INTO `transactions` (`id_t`, `date_t`, `id_src`, `montant_t`, `id_groupe`, `id_dest`, `statut_t`, `description`, `datef_t`, `motif_t`) VALUES ('1', '2019-04-01', '1', '200', NULL, '2', 'ouvert', 'los pollos hermanos', '2019-04-01', 'depanner ')";
-$qInitTbmembres1= "INSERT INTO `membres` (`id_m`, `image_m`, `nom_m`, `prenom_m`, `pseudo_m`, `ddn_m`, `mdp_m`, `email_m`, `amis_m`) VALUES ('1', 'none', 'walter', 'walt', 'heisenberg', '666-06-6', 'azerty', 'walter.walt@enseirb.fr', '2')";
-
+$qInitTbgroupes1= "INSERT INTO `groupes` ( `nom_g`, `membres_g`, `description_g`) VALUES ('heisenberg', '1|2|3|4', 'voyage')";
+$qInitTbgroupes2= "INSERT INTO `groupes` (`nom_g`, `membres_g`, `description_g`) VALUES ( 'lannister', '4|3|5', 'paiement de dettes')";
+$qInitTbgroupes3= "INSERT INTO `groupes` (`nom_g`, `membres_g`, `description_g`) VALUES ('winterfell', '4|5', 'nourriture')";
+$qInitTbtransactions1="INSERT INTO `transactions` ( `date_t`, `id_src`, `montant_t`, `id_groupe`, `id_dest`, `statut_t`, `description_t`, `datef_t`, `motif_t`) VALUES ( '2019-04-01', '1', '200', NULL, '2', 'ouvert', 'los pollos hermanos', '2019-04-01', 'NULL' )";
+$qInitTbtransactions2="INSERT INTO `transactions` (`date_t`, `id_src`, `montant_t`, `id_groupe`, `id_dest`, `statut_t`, `description_t`, `datef_t`, `motif_t`) VALUES ( '2015-04-01', '3', '200', '1', '2', 'ouvert', 'monstre', '2019-04-01', 'NULL' )";
+$qInitTbmembres1= "INSERT INTO `membres` ( `image_m`, `nom_m`, `prenom_m`, `pseudo_m`, `ddn_m`, `mdp_m`, `email_m`, `amis_m`) VALUES ('images/avatars/1.png', 'walter', 'walt', 'heisenberg', '666-06-6', 'mdp', 'walter.walt@enseirb.fr', '2')";
+$qInitTbgmembres2= "INSERT INTO `membres` (`image_m`, `nom_m`, `prenom_m`, `pseudo_m`, `ddn_m`, `mdp_m`, `email_m`, `amis_m`) VALUES ('images/avatars/2.png', 'jesse', 'pinkman', 'jesse', '666-06-7', 'mdp', 'pinkman@enseirb.fr', '1')";
+$qInitTbgmembres3= "INSERT INTO `membres` (`image_m`, `nom_m`, `prenom_m`, `pseudo_m`, `ddn_m`, `mdp_m`, `email_m`, `amis_m`) VALUES ('images/avatars/1.png', 'John', 'Snow', 'egon', '666-06-7', 'mdp', 'snow@enseirb.fr', '4|1')";
+$qInitTbgmembres4= "INSERT INTO `membres` ( `image_m`, `nom_m`, `prenom_m`, `pseudo_m`, `ddn_m`, `mdp_m`, `email_m`, `amis_m`) VALUES ('images/avatars/3.png', 'Arya', 'Arya', 'Ssark', '666-06-7', 'mdp', 'arya@enseirb.fr', '1')";
 
 echo "Connexion au serveur MySQL.";
-$con = bdd_connexion();
+$con = mysqli_connect(DB_SERVER , DB_USER, DB_PASSWORD);
 
 echo "Création de la bdd ";
 echo "<br>";
@@ -76,9 +76,25 @@ echo "<br>";
 echo mysqli_error($con);
 echo "<br>";
 
-echo "Création du groupe voyage.";
+echo "Création du groupe ...";
 echo "<br>";
-mysqli_query($con, $qInitTbgroupes);
+mysqli_query($con, $qInitTbgroupes1);
+echo mysqli_info($con);
+echo "<br>";
+echo mysqli_error($con);
+echo "<br>";
+
+echo "Création du groupe ...";
+echo "<br>";
+mysqli_query($con, $qInitTbgroupes2);
+echo mysqli_info($con);
+echo "<br>";
+echo mysqli_error($con);
+echo "<br>";
+
+echo "Création du groupe ...";
+echo "<br>";
+mysqli_query($con, $qInitTbgroupes3);
 echo mysqli_info($con);
 echo "<br>";
 echo mysqli_error($con);
@@ -92,7 +108,7 @@ echo "<br>";
 echo mysqli_error($con);
 echo "<br>";
 
-echo "Création du membre Walter Walt.";
+echo "Création du membre ...";
 echo "<br>";
 mysqli_query($con, $qInitTbmembres1);
 echo mysqli_info($con);
@@ -100,9 +116,25 @@ echo "<br>";
 echo mysqli_error($con);
 echo "<br>";
 
-echo "Création du membre Jesse Pinkman.";
+echo "Création du membre ..";
 echo "<br>";
 mysqli_query($con, $qInitTbgmembres2);
+echo mysqli_info($con);
+echo "<br>";
+echo mysqli_error($con);
+echo "<br>";
+
+echo "Création du membre ..";
+echo "<br>";
+mysqli_query($con, $qInitTbgmembres3);
+echo mysqli_info($con);
+echo "<br>";
+echo mysqli_error($con);
+echo "<br>";
+
+echo "Création du membre ..";
+echo "<br>";
+mysqli_query($con, $qInitTbgmembres4);
 echo mysqli_info($con);
 echo "<br>";
 echo mysqli_error($con);
@@ -118,17 +150,21 @@ echo "<br>";
 
 echo "Création de la transaction.";
 echo "<br>";
-mysqli_query($con, $qInitTbtransactions);
+mysqli_query($con, $qInitTbtransactions1);
 echo mysqli_info($con);
 echo "<br>";
 echo mysqli_error($con);
 echo "<br>";
 
+echo "Création de la transaction..";
+echo "<br>";
+mysqli_query($con, $qInitTbtransactions2);
+echo mysqli_info($con);
+echo "<br>";
+echo mysqli_error($con);
+echo "<br>";
+
+
+
 mysqli_close($con);
-
-
-
 ?>
-
-
-<?php include("includes/footer.php"); ?>

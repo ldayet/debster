@@ -12,6 +12,20 @@ function get_session_id(){
   }
 }
 
+function id_exists($id){
+  $bdd = bdd_connexion();
+	$requete = mysqli_query($bdd, "SELECT * FROM membres");
+	while ($donnees = mysqli_fetch_assoc($requete))
+    {
+       if  ($donnees['id_m'] == $id)
+       {
+       		return True;
+       }
+    }
+  return False;
+    mysqli_close($bdd);
+}
+
 # Permet de recuperer l'id avec le pseudo
 function id_m_avec_pseudo_m($pseudo)
 {
@@ -270,8 +284,9 @@ function dette_ami($idmoi, $idami)
 }
 
 #une fonction qui calcule mes dettes
-function dette_moi($bdd, $idmoi)
+function dette_moi($idmoi)
 {
+  $bdd = bdd_connexion();
   $requete = mysqli_query($bdd, "SELECT * FROM transactions");
   $dette = 0;
   while ($donnees = mysqli_fetch_assoc($requete))
@@ -302,8 +317,9 @@ function creance_ami($idmoi, $idami)
 }
 
 #une fonction qui calcule mes creances
-function creance_moi($bdd, $idmoi)
+function creance_moi($idmoi)
 {
+  $bdd = bdd_connexion();
   $requete = mysqli_query($bdd, "SELECT * FROM transactions");
   $creance = 0;
   while ($donnees = mysqli_fetch_assoc($requete))
@@ -589,6 +605,117 @@ function liste_dettes($id){
        }
     }
 
+}
+
+function afficher_table_groupes($id){
+  $bdd = bdd_connexion();
+  $requete = mysqli_query($bdd, "SELECT * FROM groupes WHERE membres_g LIKE '%|$id|%' ");
+  echo "<table class='mdl-data-table mdl-js-data-table mdl-shadow--2dp' width='100%'><thead><tr><th class='mdl-data-table__cell--non-numeric'>Nom du groupe</th><th class='mdl-data-table__cell--non-numeric'>Description</th><th class=''>Balance</th></tr></thead><tbody>";
+
+	while ($donnees = mysqli_fetch_assoc($requete))
+    {
+      echo "<tr  class='clickable-row' data-href='groups.php?id=".$donnees['id_g']."' >";
+      echo "<td class='mdl-data-table__cell--non-numeric'><h4>".$donnees['nom_g']."</h4></td>";
+      echo "<td class='mdl-data-table__cell--non-numeric'><p>".$donnees['description_g']."</p></td>";
+      echo "<td class=''><p>".dettes_groupe($id,$donnees['id_g'])."</p></td>";
+      echo "</tr>";
+
+    }
+  
+    echo "</tbody></table>";
+
+}
+
+# Permet de recuperer le nom du groupe avec l'id
+function groupe_avec_id_g($id_g)
+{
+  $bdd = bdd_connexion();
+	$requete = mysqli_query($bdd, "SELECT * FROM groupes");
+	while ($donnees = mysqli_fetch_assoc($requete))
+    {
+       if  ($donnees['id_g'] == $id_g)
+       {
+       		return $donnees;
+       }
+    }
+    mysqli_close($bdd);
+}
+
+function get_group_avatars($id,$id_g){
+  $bdd = bdd_connexion();
+	$requete = mysqli_query($bdd, "SELECT * FROM groupes");
+	while ($donnees = mysqli_fetch_assoc($requete))
+    {
+       if  ($donnees['id_g'] == $id_g)
+       {
+       		$membres = $donnees['membres_g'];
+       }
+    }
+
+  #on convertie cette chaine de caractère en tableau qui contient les id des amis
+  $membres = explode("|", $membres);
+  $i = 0;
+  echo "<span data-toggle='tooltip' title='". fullname_id($id)."'>";
+  echo "<a href='profil.php'>";
+  echo "<img class='demo-avatar' src='".image_m_avec_id_m($id)."'>";
+  echo "</a>";
+  echo "</span>";
+  while ($i<sizeof($membres))
+  {
+     if($membres[$i] != "" && $membres[$i] != $id) {
+      
+      echo "<span data-toggle='tooltip' title='". fullname_id($membres[$i])."'>";
+      echo "<a href='my_friend.php?id_ami=".$membres[$i]."'>";
+      echo "<img class='demo-avatar' src='".image_m_avec_id_m($membres[$i])."'>";
+      echo "</a>";
+      echo "</span>";
+      
+    }
+    $i = $i +1;
+}
+  mysqli_close($bdd);
+}
+
+function id_in_group($id,$id_g){
+  $bdd = bdd_connexion();
+	$requete = mysqli_query($bdd, "SELECT * FROM groupes");
+	while ($donnees = mysqli_fetch_assoc($requete))
+    {
+       if  ($donnees['id_g'] == $id_g)
+       {
+       		$membres = $donnees['membres_g'];
+       }
+    }
+
+  #on convertie cette chaine de caractère en tableau qui contient les id des amis
+  $membres = explode("|", $membres);
+  $i = 0;
+  while ($i<sizeof($membres))
+  {
+     if($membres[$i] == $id) {
+        return True;
+      
+    }
+    $i = $i +1;
+}
+return False;
+  mysqli_close($bdd);
+}
+
+#une fonction qui calcule mes dettes dans un groupe
+function dettes_groupe($id,$id_g)
+{
+  $bdd = bdd_connexion();
+  $requete = mysqli_query($bdd, "SELECT * FROM transactions WHERE id_dest LIKE '%|$id|%'");
+  $dette = 0;
+  while ($donnees = mysqli_fetch_assoc($requete))
+  {
+    if  ($donnees['statut_t'] == 'ouvert' && $donnees['id_groupe'] == $id_g)
+    {
+      $dette = $dette + $donnees['montant_t'];
+    }
+  }
+  return $dette;
 }
 
 ?>
