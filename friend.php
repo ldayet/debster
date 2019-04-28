@@ -5,18 +5,13 @@
 <?php for_logged(); ?>
 
 <div class="jumbotron">
-  <h1 class="display-4">Ma liste d'amis</h1>
+  <h1 class="display-4"><center>Ma liste d'amis</center></h1>
 </div>
 
-<!-- Three Line List with secondary info and action -->
-<style>
-.demo-list-three {
-  width: 650px;
-}
 
-</style>
-<?php 
-$mysqli  = bdd_connexion(DB_SERVER , DB_USER, DB_PASSWORD, DB_DATABASE) ;?>
+
+
+
 <table width=100% class="mdl-data-table mdl-js-data-table">
   <thead>
     <tr>
@@ -29,27 +24,28 @@ $mysqli  = bdd_connexion(DB_SERVER , DB_USER, DB_PASSWORD, DB_DATABASE) ;?>
   </thead>
   <tbody>
   	  <?php 
-  	  $mon_id = $_SESSION['user']['id_m'];
-      $nb_amis = nb_amis($mysqli,$mon_id);
-      $j=1;
+  	  $mon_id = $id;
+      $nb_amis = nb_amis($mon_id);
+      $j=0;
       while($j<$nb_amis){
-		  $id = liste_amis1($mysqli,$mon_id,$j); ?>
+		  $id = liste_amis1($mon_id,$j); ?>
     	  <tr>
 		  <td class="mdl-data-table__cell--non-numeric">
+		  	
 		  	<?php 
-		  	$image = image_m_avec_id_m($mysqli, $id);
-		  	echo '<img src=$image height=60%>'; ?>
+		  	$image = image_m_avec_id_m($id);
+		  	echo "<img src=$image class='demo-avatar'>"; ?>
 		  </td>
 		  <td class="mdl-data-table__cell--non-numeric">
-		  	<?php echo nom_m_avec_id_m($mysqli, $id); ?>
+		  	<?php echo nom_m_avec_id_m($id); ?>
 		  </td>
 		  <td class="mdl-data-table__cell--non-numeric">
-		  	<?php echo prenom_m_avec_id_m($mysqli, $id); ?>
+		  	<?php echo prenom_m_avec_id_m($id); ?>
 		  </td>
 		  <td class="mdl-data-table__cell--non-numeric">
-		  	<?php echo balance_ami($mysqli, $mon_id, $id);
+		  	<?php echo balance_ami($mon_id, $id);
 		  	echo "\n";
-		  	$balance = balance_ami($mysqli, $mon_id, $id);
+		  	$balance = balance_ami($mon_id, $id);
 		  	if ($balance==0){
 		  		echo '<img src="images/equal.svg" height=60% />';
 		  	}
@@ -61,7 +57,10 @@ $mysqli  = bdd_connexion(DB_SERVER , DB_USER, DB_PASSWORD, DB_DATABASE) ;?>
 		  	}?>
 		  </td>
 		  <td class="mdl-data-table__cell--non-numeric">      	
-		  	<a href="#" onclick="supprimer_ami($mysqli, $mon_id, $id);"><img src="images/delete-button.svg" height=60%>
+		  	<?php 
+		  	echo "<a href=\"delete_friend.php?id_ami=$id\">";
+		  	echo '<img src="images/delete-button.svg" height=60%></a>';
+		  	echo "</a>";?>
 		  <?php $j=$j+1;?>
       </td>
   	  <?php } ?>
@@ -69,12 +68,5 @@ $mysqli  = bdd_connexion(DB_SERVER , DB_USER, DB_PASSWORD, DB_DATABASE) ;?>
   </tbody>
 </table>
 
-<form action="login.php">
 
-
-<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect mdl-button--colored fixed">
-    <i class="material-icons"> <a href="index.php">add</a></i>   
-</button>
-
-</form>
 <?php include("includes/footer.php"); ?>

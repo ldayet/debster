@@ -11,7 +11,7 @@
 
 <?php 
 $bdd =bdd_connexion();
-liste_amis($bdd, $_SESSION['user']['id_m'] );
+liste_amis($_SESSION['user']['id_m'] );
  ?>
 
 <?php include("includes/footer.php"); ?>

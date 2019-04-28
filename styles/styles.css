@@ -202,3 +202,13 @@ footer {
 .card-title {
   margin-bottom: 1.8rem;
 }
+
+.logo>h1>a:hover{
+  color: rgb(253, 253, 253);
+  text-decoration: none;
+
+}
+.logo>h1>a{
+  color: #1efcd1;
+  text-decoration: none;
+}
