@@ -6,21 +6,27 @@
 
 <?php
 
+
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+
 if (isset($_POST['friends']) && isset($_POST['montant']) && isset($_POST['titre']) ) {
   $friends = $_POST['friends'];
   $montant = $_POST['montant'];
   $titre = $_POST['titre'];
 
-  echo "Titre de la depense : ".$titre;
-  echo "Titre de la depense : ".$montant;
-  echo "You selected the following friends : <br>";
+
   foreach ($friends as $key => $value) {
-    echo fullname_id($value)." <br>";
+    ajout_transaction($id, $value, $montant, $titre);
   }
+  $_SESSION['flash']['success'] = "La depense a été bien ajoutée";
+  header('Location:ajout.php');
+}else{
+  $_SESSION['flash']['warning'] = "Veuillez remplir tout les champs.";
+  header('Location:ajout.php');
 }
 
 
-
+}
 
 
 ?>
