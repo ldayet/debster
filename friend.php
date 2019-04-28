@@ -5,14 +5,14 @@
 <?php for_logged(); ?>
 
 <div class="jumbotron">
-  <h1 class="display-4"><center>Ma liste d'amis</center></h1>
+  <h1 class="display-3">Mes amis</h1>
 </div>
 
 
 
 
 
-<table width=100% class="mdl-data-table mdl-js-data-table">
+<table width=100% class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
   <thead>
     <tr>
       <th class="mdl-data-table__cell--non-numeric"></th>

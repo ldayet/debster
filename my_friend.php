@@ -51,7 +51,7 @@ $id_ami = $_GET['id_ami'];
               </td>
               <td>
                 <?php 
-                  echo $donnees['description'];
+                  echo $donnees['description_t'];
                 ?>
               </td>
               <td>
