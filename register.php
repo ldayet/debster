@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $mdp = $_POST['mdp'];
   $mdpc = $_POST['mdpc'];
 
-  $mysqli  = bdd_connexion(DB_SERVER , DB_USER, DB_PASSWORD, DB_DATABASE) ;
+  $mysqli  = bdd_connexion() ;
 
   $errors = 0;
 

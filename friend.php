@@ -5,22 +5,14 @@
 <?php for_logged(); ?>
 
 <div class="jumbotron">
-  <h1 class="display-4"><center>Ma liste d'amis</center></h1>
+  <h1 class="display-3">Mes amis</h1>
 </div>
 
-<!-- Three Line List with secondary info and action -->
-<style>
-.demo-list-three {
-  width: 650px;
-}
-
-</style>
-
-<?php $mysqli  = bdd_connexion() ;?>
 
 
 
-<table width=100% class="mdl-data-table mdl-js-data-table">
+
+<table width=100% class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
   <thead>
     <tr>
       <th class="mdl-data-table__cell--non-numeric"></th>
@@ -32,37 +24,28 @@
   </thead>
   <tbody>
   	  <?php 
-  	  $mon_id = $_SESSION['user']['id_m'];
-      $nb_amis = nb_amis($mysqli,$mon_id);
-      $j=1;
+  	  $mon_id = $id;
+      $nb_amis = nb_amis($mon_id);
+      $j=0;
       while($j<$nb_amis){
-		  $id = liste_amis1($mysqli,$mon_id,$j); ?>
+		  $id = liste_amis1($mon_id,$j); ?>
     	  <tr>
 		  <td class="mdl-data-table__cell--non-numeric">
 		  	
 		  	<?php 
-		  	echo "<a href=\"my_friend.php?id_ami=$id\">";
-		  	$image = image_m_avec_id_m($mysqli, $id);
-		  	echo "<img src=$image class='demo-avatar'>"; 
-		  	echo "</a>";?>
-		  	
+		  	$image = image_m_avec_id_m($id);
+		  	echo "<img src=$image class='demo-avatar'>"; ?>
 		  </td>
 		  <td class="mdl-data-table__cell--non-numeric">
-		  	<?php 
-		  	echo "<a href=\"my_friend.php?id_ami=$id\">";
-		  	echo nom_m_avec_id_m($mysqli, $id); 
-		  	echo "</a>";?>
+		  	<?php echo nom_m_avec_id_m($id); ?>
 		  </td>
 		  <td class="mdl-data-table__cell--non-numeric">
-		  	<?php 
-		  	echo "<a href=\"my_friend.php?id_ami=$id\">";
-		  	echo prenom_m_avec_id_m($mysqli, $id); 
-		  	echo "</a>";?>
+		  	<?php echo prenom_m_avec_id_m($id); ?>
 		  </td>
 		  <td class="mdl-data-table__cell--non-numeric">
-		  	<?php echo balance_ami($mysqli, $mon_id, $id);
+		  	<?php echo balance_ami($mon_id, $id);
 		  	echo "\n";
-		  	$balance = balance_ami($mysqli, $mon_id, $id);
+		  	$balance = balance_ami($mon_id, $id);
 		  	if ($balance==0){
 		  		echo '<img src="images/equal.svg" height=60% />';
 		  	}

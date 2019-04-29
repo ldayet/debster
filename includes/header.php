@@ -1,5 +1,6 @@
 <?php include("includes/functions.php"); ?>
-<?php include("includes/templates.php"); ?>
+
+<?php?>
 
 <!doctype html>
 <html lang="en">

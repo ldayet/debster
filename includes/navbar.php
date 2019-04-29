@@ -14,16 +14,16 @@
 
 <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
     <div class="logo">
-      <h1>DEBSTER</h1>
+      <h1><a href="dashboard.php" >DEBSTER</a></h1>
       <h6>Your favorite app</h6>
     </div>
 
     <?php if (isset($_SESSION['user'])) : ?>   
   <header class="demo-drawer-header">
 
-    <img src=<?php echo $_SESSION['user']['image_m']; ?> class="demo-avatar">
+    <img src=<?php echo image_m_avec_id_m($id); ?> class="demo-avatar">
     <div class="demo-avatar-dropdown">
-      <span><?php echo $_SESSION['user']['nom_m']." ".$_SESSION['user']['prenom_m'] ; ?></span>
+      <span><?php echo fullname_id($id) ; ?></span>
        </div>
   </header>
   <?php endif; ?>
@@ -31,15 +31,18 @@
   <?php if (isset($_SESSION['user'])) : ?> 
 
   <a class="mdl-navigation__link" href="dashboard.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">dashboard</i>Tableau de bord</a>
-  <a class="mdl-navigation__link" href="profil.php0"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">face</i>Mon profil</a>
+  <a class="mdl-navigation__link" href="profil.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">face</i>Mon profil</a>
   <a class="mdl-navigation__link" href="dettes.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">attach_money</i>Dettes et créances</a>
-  <a class="mdl-navigation__link" href="friend.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">sentiment_satisfied_alt</i>Amis</a>
+  <a class="mdl-navigation__link" href="friend.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">sentiment_satisfied_alt</i>Mes amis</a>
+  <a class="mdl-navigation__link" href="groups.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">sentiment_satisfied_alt</i>Mes groupes</a>
 
   <a class="mdl-navigation__link" href="logout.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">not_interested</i>Se déconnecter</a>
 
   <?php else: ?>
   <a class="mdl-navigation__link" href="index.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">dashboard</i>Accueil</a>
-  <a class="mdl-navigation__link" href="login.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">face</i>Se connecter</a>
+  <a class="mdl-navigation__link" href="login.php"><i class="material-icons">
+arrow_upward
+</i>Se connecter</a>
   <a class="mdl-navigation__link" href="register.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">face</i>S'inscrire</a>
   <a class="mdl-navigation__link" href="contact.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">attach_money</i>Contact</a>
   <?php endif; ?>
