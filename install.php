@@ -44,11 +44,11 @@ $qInitTbgroupes1= "INSERT INTO `groupes` ( `nom_g`, `membres_g`, `description_g`
 $qInitTbgroupes2= "INSERT INTO `groupes` (`nom_g`, `membres_g`, `description_g`) VALUES ( 'lannister', '4|3|5', 'paiement de dettes')";
 $qInitTbgroupes3= "INSERT INTO `groupes` (`nom_g`, `membres_g`, `description_g`) VALUES ('winterfell', '4|5', 'nourriture')";
 $qInitTbtransactions1="INSERT INTO `transactions` ( `date_t`, `id_src`, `montant_t`, `id_groupe`, `id_dest`, `statut_t`, `description_t`, `datef_t`, `motif_t`) VALUES ( '2019-04-01', '1', '200', NULL, '2', 'ouvert', 'los pollos hermanos', '2019-04-01', 'NULL' )";
-$qInitTbtransactions2="INSERT INTO `transactions` (`date_t`, `id_src`, `montant_t`, `id_groupe`, `id_dest`, `statut_t`, `description_t`, `datef_t`, `motif_t`) VALUES ( '2015-04-01', '3', '200', '1', '2', 'ouvert', 'monstre', '2019-04-01', 'NULL' )";
-$qInitTbmembres1= "INSERT INTO `membres` ( `image_m`, `nom_m`, `prenom_m`, `pseudo_m`, `ddn_m`, `mdp_m`, `email_m`, `amis_m`) VALUES ('images/avatars/1.png', 'walter', 'walt', 'heisenberg', '666-06-6', 'mdp', 'walter.walt@enseirb.fr', '2')";
-$qInitTbgmembres2= "INSERT INTO `membres` (`image_m`, `nom_m`, `prenom_m`, `pseudo_m`, `ddn_m`, `mdp_m`, `email_m`, `amis_m`) VALUES ('images/avatars/2.png', 'jesse', 'pinkman', 'jesse', '666-06-7', 'mdp', 'pinkman@enseirb.fr', '1')";
-$qInitTbgmembres3= "INSERT INTO `membres` (`image_m`, `nom_m`, `prenom_m`, `pseudo_m`, `ddn_m`, `mdp_m`, `email_m`, `amis_m`) VALUES ('images/avatars/1.png', 'John', 'Snow', 'egon', '666-06-7', 'mdp', 'snow@enseirb.fr', '4|1')";
-$qInitTbgmembres4= "INSERT INTO `membres` ( `image_m`, `nom_m`, `prenom_m`, `pseudo_m`, `ddn_m`, `mdp_m`, `email_m`, `amis_m`) VALUES ('images/avatars/3.png', 'Arya', 'Arya', 'Ssark', '666-06-7', 'mdp', 'arya@enseirb.fr', '1')";
+$qInitTbtransactions2="INSERT INTO `transactions` (`date_t`, `id_src`, `montant_t`, `id_groupe`, `id_dest`, `statut_t`, `description_t`, `datef_t`, `motif_t`) VALUES ( '2015-04-01', '3', '200', '1', NULL, 'ouvert', 'monstre', '2019-04-01', 'NULL' )";
+$qInitTbmembres1= "INSERT INTO `membres` ( `image_m`, `nom_m`, `prenom_m`, `pseudo_m`, `ddn_m`, `mdp_m`, `email_m`, `amis_m`) VALUES ('/images/avatars/1', 'walter', 'walt', 'heisenberg', '666-06-6', 'azerty', 'walter.walt@enseirb.fr', '2')";
+$qInitTbgmembres2= "INSERT INTO `membres` (`image_m`, `nom_m`, `prenom_m`, `pseudo_m`, `ddn_m`, `mdp_m`, `email_m`, `amis_m`) VALUES ('/images/avatars/2', 'jesse', 'pinkman', 'jesse', '666-06-7', 'azerty1', 'pinkman@enseirb.fr', '1')";
+$qInitTbgmembres3= "INSERT INTO `membres` (`image_m`, `nom_m`, `prenom_m`, `pseudo_m`, `ddn_m`, `mdp_m`, `email_m`, `amis_m`) VALUES ('/images/avatars/1', 'John', 'Snow', 'Egon', '666-06-7', 'azerty12', 'snow@enseirb.fr', '4|1')";
+$qInitTbgmembres4= "INSERT INTO `membres` ( `image_m`, `nom_m`, `prenom_m`, `pseudo_m`, `ddn_m`, `mdp_m`, `email_m`, `amis_m`) VALUES ('/images/avatars/3', 'Arya', 'Arya', 'Stark', '666-06-7', 'azerty1', 'arya@enseirb.fr', '1')";
 
 echo "Connexion au serveur MySQL.";
 $con = mysqli_connect(DB_SERVER , DB_USER, DB_PASSWORD);
@@ -168,3 +168,6 @@ echo "<br>";
 
 mysqli_close($con);
 ?>
+
+
+<?php include("includes/footer.php"); ?>

@@ -5,7 +5,7 @@
 <?php for_logged(); ?>
 
 <div class="jumbotron">
-  <h1 class="display-3">Mes amis</h1>
+  <h1 class="display-4"><center>Ma liste d'amis</center></h1>
 </div>
 
 
@@ -31,16 +31,24 @@
 		  $id = liste_amis1($mon_id,$j); ?>
     	  <tr>
 		  <td class="mdl-data-table__cell--non-numeric">
-		  	
 		  	<?php 
+		  	echo "<a href=\"my_friend.php?id_ami=$id\">";
 		  	$image = image_m_avec_id_m($id);
-		  	echo "<img src=$image class='demo-avatar'>"; ?>
+		  	echo "<img src=$image class='demo-avatar'>"; 
+		  	echo "</a>";?>
 		  </td>
 		  <td class="mdl-data-table__cell--non-numeric">
-		  	<?php echo nom_m_avec_id_m($id); ?>
+		  	<?php 
+		  	echo "<a href=\"my_friend.php?id_ami=$id\">";
+		  	echo nom_m_avec_id_m($id); 
+		  	echo "</a>";?>
 		  </td>
 		  <td class="mdl-data-table__cell--non-numeric">
-		  	<?php echo prenom_m_avec_id_m($id); ?>
+		  	<?php 
+		  	echo "<a href=\"my_friend.php?id_ami=$id\">";
+		  	$prenom = prenom_m_avec_id_m($id); 
+		  	echo $prenom; 
+		  	echo "</a>";?>
 		  </td>
 		  <td class="mdl-data-table__cell--non-numeric">
 		  	<?php echo balance_ami($mon_id, $id);
@@ -61,8 +69,9 @@
 		  	echo "<a href=\"delete_friend.php?id_ami=$id\">";
 		  	echo '<img src="images/delete-button.svg" height=60%></a>';
 		  	echo "</a>";?>
-		  <?php $j=$j+1;?>
+		  	<?php $j=$j+1;?>
       </td>
+
   	  <?php } ?>
     </tr>
   </tbody>

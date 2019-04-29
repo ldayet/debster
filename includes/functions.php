@@ -718,4 +718,30 @@ function dettes_groupe($id,$id_g)
   return $dette;
 }
 
+
+function afficher_groupe_depenses($id,$id_g){
+
+  $bdd = bdd_connexion();
+  
+  $requete = mysqli_query($bdd, "SELECT * FROM transactions WHERE id_groupe = $id_g ");
+
+  echo "<table class='mdl-data-table mdl-js-data-table mdl-shadow--2dp' width='100%'><thead><tr><th class='mdl-data-table__cell--non-numeric'>Debiteur</th><th class=''>Montant</th><th class='mdl-data-table__cell--non-numeric'>Description</th><th class='mdl-data-table__cell--non-numeric'>Statut</th></tr></thead><tbody>";
+
+	while ($donnees = mysqli_fetch_assoc($requete))
+    {
+      echo "<tr>";
+      echo "<td class='mdl-data-table__cell--non-numeric'><h4>".fullname_id($donnees['id_src'])."</h4></td>";
+      echo "<td class=''><p>".$donnees['montant_t']."</p></td>";
+      echo "<td class='mdl-data-table__cell--non-numeric'><p>".$donnees['description_t']."</p></td>";
+      echo "<td class='mdl-data-table__cell--non-numeric'><p>".$donnees['date_t']."</p></td>";
+      echo "</tr>";
+
+    }
+  
+    echo "</tbody></table>";
+
+}
+
+
+
 ?>

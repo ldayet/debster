@@ -26,6 +26,9 @@ $group = groupe_avec_id_g($id_g);
 
 
 
+<?php // afficher_groupe_depenses($id,$id_g); ?>
+
+<?php include("includes/groupe_depenses.php") ?>
 
 
 
