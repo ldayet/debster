@@ -36,22 +36,40 @@ $mon_id = $_SESSION['user']['id_m'];?>
                   echo $donnees['montant_t'];
                 ?>
                 €
+                <?php     
+                echo "\n";            
+                #echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
+                echo '<img src="images/pencil.svg" height=30%></a>';
+                #echo "</a>";
+                ?>
               </td>
               <td>
                 <?php 
                   echo nom_m_avec_id_m($mysqli,$donnees['id_src']);
                   echo "\n";
                   echo prenom_m_avec_id_m($mysqli,$donnees['id_src']);
+                echo "\n"; 
+                #echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
+                echo '<img src="images/pencil.svg" height=30%></a>';
+                #echo "</a>";
                 ?>
               </td>
               <td>
                 <?php 
                   echo $donnees['description'];
+                  echo "\n"; 
+                #echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
+                echo '<img src="images/pencil.svg" height=30%></a>';
+                #echo "</a>";
                 ?>
               </td>
               <td>
                 <?php 
                   echo $donnees['date_t'];
+                  echo "\n"; 
+                #echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
+                echo '<img src="images/pencil.svg" height=30%></a>';
+                #echo "</a>";
                 ?>
               </td>
               <td>
@@ -91,22 +109,40 @@ $mon_id = $_SESSION['user']['id_m'];?>
                   echo $donnees['montant_t'];
                 ?>
                 €
+                <?php     
+                echo "\n";            
+                #echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
+                echo '<img src="images/pencil.svg" height=30%></a>';
+                #echo "</a>";
+                ?>
               </td>
               <td>
                 <?php 
                   echo nom_m_avec_id_m($mysqli,$donnees['id_src']);
                   echo "\n";
                   echo prenom_m_avec_id_m($mysqli,$donnees['id_src']);
+                  echo "\n"; 
+                #echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
+                echo '<img src="images/pencil.svg" height=30%></a>';
+                #echo "</a>";
                 ?>
               </td>
               <td>
                 <?php 
                   echo $donnees['description'];
+                  echo "\n"; 
+                #echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
+                echo '<img src="images/pencil.svg" height=30%></a>';
+                #echo "</a>";
                 ?>
               </td>
               <td>
                 <?php 
                   echo $donnees['date_t'];
+                  echo "\n"; 
+                #echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
+                echo '<img src="images/pencil.svg" height=30%></a>';
+                #echo "</a>";
                 ?>
               </td>
               <td>

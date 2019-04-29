@@ -46,20 +46,41 @@ $id_ami = $_GET['id_ami'];?>
                   echo $donnees['montant_t'];
                 ?>
                 €
-              </td>
-              <td>
-                <?php 
-                  echo $donnees['description'];
+                <?php     
+                echo "\n";            
+                #echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
+                echo '<img src="images/pencil.svg" height=30%></a>';
+                #echo "</a>";
                 ?>
               </td>
               <td>
                 <?php 
-                  echo $donnees['date_t'];
+                echo $donnees['description'];
+                echo "\n"; 
+                #echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
+                echo '<img src="images/pencil.svg" height=30%></a>';
+                #echo "</a>";
                 ?>
               </td>
               <td>
-                  <a href="#"><img src="images/checked.svg" height=10%></a>
-                  <a href="#"><img src="images/cancel.svg" height=10%></a>
+                <?php 
+                echo $donnees['date_t'];
+                echo "\n"; 
+                #echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
+                echo '<img src="images/pencil.svg" height=30%></a>';
+                #echo "</a>";
+                ?>
+              </td>
+              <td>
+                <?php
+                echo "<a href=\"transaction_ok.php?id_ami=$id_ami\">";
+                echo '<img src="images/checked.svg" height=10%></a>';
+                echo "</a>";
+                echo "\n";
+                echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
+                echo '<img src="images/cancel.svg" height=10%></a>';
+                echo "</a>";
+                ?>
               </td>
             </tr>
             <?php     
@@ -94,20 +115,41 @@ $id_ami = $_GET['id_ami'];?>
                   echo $donnees['montant_t'];
                 ?>
                 €
-              </td>
-              <td>
                 <?php 
-                  echo $donnees['description'];
+                echo "\n";             
+                #echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
+                echo '<img src="images/pencil.svg" height=30%></a>';
+                #echo "</a>";
                 ?>
               </td>
               <td>
                 <?php 
-                  echo $donnees['date_t'];
+                echo $donnees['description'];
+                echo "\n"; 
+                #echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
+                echo '<img src="images/pencil.svg" height=30%></a>';
+                #echo "</a>";
                 ?>
               </td>
               <td>
-                  <a href="#" onclick="rembourser_transaction($mysqli, $donnees['id_t'], 'remboursé')"><img src="images/checked.svg" height=10%></a>
-                  <a href="#"><img src="images/cancel.svg" height=10%></a>
+                <?php 
+                echo $donnees['date_t'];
+                echo "\n"; 
+                #echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
+                echo '<img src="images/pencil.svg" height=30%></a>';
+                #echo "</a>";
+                ?>
+              </td>
+              <td>
+                <?php
+                echo "<a href=\"transaction_ok.php?id_ami=$id_ami\">";
+                echo '<img src="images/checked.svg" height=10%></a>';
+                echo "</a>";
+                echo "\n";
+                echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
+                echo '<img src="images/cancel.svg" height=10%></a>';
+                echo "</a>";
+                ?>
               </td>
             </tr>
             <?php     
