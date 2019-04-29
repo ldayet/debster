@@ -7,6 +7,15 @@
 <?php 
 $mon_id = get_session_id();
 $id_ami = $_GET['id_ami'];
+if (isset($_GET['action'])){
+  $action = $_GET['action'];
+
+  if (isset($_GET['id_t'])){
+    $id_t = $_GET['id_t'];
+
+
+  }
+}
 ?>
 
 <div class="jumbotron">
@@ -45,6 +54,7 @@ $id_ami = $_GET['id_ami'];
             <tr class="bg-success">
               <td>
                 <?php 
+                  $id_transaction = $donnees['id_t'];
                   echo $donnees['montant_t'];
                 ?>
                 €
@@ -57,7 +67,7 @@ $id_ami = $_GET['id_ami'];
               </td>
               <td>
                 <?php 
-                echo $donnees['description'];
+                echo $donnees['description_t'];
                 echo "\n"; 
                 #echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
                 echo '<img src="images/pencil.svg" height=30%></a>';
@@ -75,11 +85,11 @@ $id_ami = $_GET['id_ami'];
               </td>
               <td>
                 <?php
-                echo "<a href=\"transaction_ok.php?id_ami=$id_ami\">";
+                echo "<a href=\"transaction_ok.php?id_ami=$id_ami&amp;page=1&amp;id_t=$id_transaction\">";
                 echo '<img src="images/checked.svg" height=10%></a>';
                 echo "</a>";
                 echo "\n";
-                echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
+                echo "<a href=\"transaction_cancel.php?id_ami=$id_ami&amp;page=1&amp;id_t=$id_transaction\">";
                 echo '<img src="images/cancel.svg" height=10%></a>';
                 echo "</a>";
                 ?>
@@ -114,6 +124,7 @@ $id_ami = $_GET['id_ami'];
             <tr class="bg-danger">
               <td>
                 <?php 
+                  $id_transaction = $donnees['id_t'];
                   echo $donnees['montant_t'];
                 ?>
                 €
@@ -126,7 +137,7 @@ $id_ami = $_GET['id_ami'];
               </td>
               <td>
                 <?php 
-                echo $donnees['description'];
+                echo $donnees['description_t'];
                 echo "\n"; 
                 #echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
                 echo '<img src="images/pencil.svg" height=30%></a>';
@@ -144,11 +155,11 @@ $id_ami = $_GET['id_ami'];
               </td>
               <td>
                 <?php
-                echo "<a href=\"transaction_ok.php?id_ami=$id_ami\">";
+                echo "<a href=\"transaction_ok.php?id_ami=$id_ami&amp;page=1&amp;id_t=$id_transaction\">";
                 echo '<img src="images/checked.svg" height=10%></a>';
                 echo "</a>";
                 echo "\n";
-                echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
+                echo "<a href=\"transaction_cancel.php?id_ami=$id_ami&amp;page=1&amp;id_t=$id_transaction\">";
                 echo '<img src="images/cancel.svg" height=10%></a>';
                 echo "</a>";
                 ?>

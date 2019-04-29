@@ -45,10 +45,12 @@ $mon_id = $_SESSION['user']['id_m'];?>
                 ?>
               </td>
               <td>
-                <?php 
-                  echo nom_m_avec_id_m($mysqli,$donnees['id_src']);
+                <?php
+                  $id_transaction = $donnees['id_t'];
+                  $id_ami=$donnees['id_src'];
+                  echo nom_m_avec_id_m($donnees['id_src']);
                   echo "\n";
-                  echo prenom_m_avec_id_m($mysqli,$donnees['id_src']);
+                  echo prenom_m_avec_id_m($donnees['id_src']);
                 echo "\n"; 
                 #echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
                 echo '<img src="images/pencil.svg" height=30%></a>';
@@ -57,7 +59,7 @@ $mon_id = $_SESSION['user']['id_m'];?>
               </td>
               <td>
                 <?php 
-                  echo $donnees['description'];
+                  echo $donnees['description_t'];
                   echo "\n"; 
                 #echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
                 echo '<img src="images/pencil.svg" height=30%></a>';
@@ -74,8 +76,15 @@ $mon_id = $_SESSION['user']['id_m'];?>
                 ?>
               </td>
               <td>
-                  <a href="#"><img src="images/checked.svg" height=10%></a>
-                  <a href="#"><img src="images/cancel.svg" height=10%></a>
+                <?php
+                echo "<a href=\"transaction_ok.php?id_ami=$id_ami&amp;page=0&amp;id_t=$id_transaction\">";
+                echo '<img src="images/checked.svg" height=10%></a>';
+                echo "</a>";
+                echo "\n";
+                echo "<a href=\"transaction_cancel.php?id_ami=$id_ami&amp;page=0&amp;id_t=$id_transaction\">";
+                echo '<img src="images/cancel.svg" height=10%></a>';
+                echo "</a>";
+                ?>
               </td>
             </tr>
             <?php     
@@ -119,9 +128,11 @@ $mon_id = $_SESSION['user']['id_m'];?>
               </td>
               <td>
                 <?php 
-                  echo nom_m_avec_id_m($mysqli,$donnees['id_src']);
+                  $id_transaction = $donnees['id_t'];
+                  $id_ami=$donnees['id_src'];
+                  echo nom_m_avec_id_m($donnees['id_src']);
                   echo "\n";
-                  echo prenom_m_avec_id_m($mysqli,$donnees['id_src']);
+                  echo prenom_m_avec_id_m($donnees['id_src']);
                   echo "\n"; 
                 #echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
                 echo '<img src="images/pencil.svg" height=30%></a>';
@@ -130,7 +141,7 @@ $mon_id = $_SESSION['user']['id_m'];?>
               </td>
               <td>
                 <?php 
-                  echo $donnees['description'];
+                  echo $donnees['description_t'];
                   echo "\n"; 
                 #echo "<a href=\"transaction_cancel.php?id_ami=$id_ami\">";
                 echo '<img src="images/pencil.svg" height=30%></a>';
@@ -147,8 +158,15 @@ $mon_id = $_SESSION['user']['id_m'];?>
                 ?>
               </td>
               <td>
-                  <a href="#" onclick="rembourser_transaction($mysqli, $donnees['id_t'], 'remboursé')"><img src="images/checked.svg" height=10%></a>
-                  <a href="#"><img src="images/cancel.svg" height=10%></a>
+                <?php
+                echo "<a href=\"transaction_ok.php?id_ami=$id_ami&amp;page=0&amp;id_t=$id_transaction\">";
+                echo '<img src="images/checked.svg" height=10%></a>';
+                echo "</a>";
+                echo "\n";
+                echo "<a href=\"transaction_cancel.php?id_ami=$id_ami&amp;page=0&amp;id_t=$id_transaction\">";
+                echo '<img src="images/cancel.svg" height=10%></a>';
+                echo "</a>";
+                ?>
               </td>
             </tr>
             <?php     
