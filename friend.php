@@ -55,37 +55,40 @@ if (isset($_GET['action'])){
     </tr>
   </thead>
   <tbody>
-  	  <?php 
-  	  $mon_id = $id;
-      $nb_amis = nb_amis($mon_id);
-      $j=0;
-      while($j<$nb_amis){
-		  $id = liste_amis1($mon_id,$j); ?>
+	<?php $amis = liste_amis($id); ?>
+
+	<?php var_dump($amis); ?>
+
+  <?php for ($i=0; $i <sizeof($amis) ; $i++): ?>
+
+	<?php $ami = $amis[$i]; ?>
+
     	  <tr>
+
 		  <td class="mdl-data-table__cell--non-numeric">
-		  	<?php 
-		  	echo "<a href=\"my_friend.php?id_ami=$id\">";
-		  	$image = image_m_avec_id_m($id);
-		  	echo "<img src=$image class='demo-avatar'>"; 
-		  	echo "</a>";?>
+				  	
+		  	<img src="<?php echo image_m_avec_id_m($ami); ?>" class='demo-avatar'>
+		  	
+		  </td>
+
+		  <td class="mdl-data-table__cell--non-numeric">
+		  	
+		  	
+		  	<?php echo nom_m_avec_id_m($ami); ?>
+		  	
 		  </td>
 		  <td class="mdl-data-table__cell--non-numeric">
-		  	<?php 
-		  	echo "<a href=\"my_friend.php?id_ami=$id\">";
-		  	echo nom_m_avec_id_m($id); 
-		  	echo "</a>";?>
+		  	
+		  	
+		  	<?php echo prenom_m_avec_id_m($ami); ?>
+		  	
 		  </td>
+
+
 		  <td class="mdl-data-table__cell--non-numeric">
-		  	<?php 
-		  	echo "<a href=\"my_friend.php?id_ami=$id\">";
-		  	$prenom = prenom_m_avec_id_m($id); 
-		  	echo $prenom; 
-		  	echo "</a>";?>
-		  </td>
-		  <td class="mdl-data-table__cell--non-numeric">
-		  	<?php echo balance_ami($mon_id, $id);
+		  	<?php echo balance_ami($id, $ami);
 		  	echo "\n";
-		  	$balance = balance_ami($mon_id, $id);
+		  	$balance = balance_ami($id, $ami);
 		  	if ($balance==0){
 		  		echo '<img src="images/equal.svg" height=60% />';
 		  	}
@@ -96,15 +99,15 @@ if (isset($_GET['action'])){
 		  		echo '<img src="images/download.svg" height=60% />';
 		  	}?>
 		  </td>
+
 		  <td class="mdl-data-table__cell--non-numeric">      	
 		  	<?php 
 		  	echo "<a href=\"friend.php?id_ami=$id&amp;action=5\">";
 		  	echo '<img src="images/delete-button.svg" height=60%></a>';
 		  	echo "</a>";?>
-		  	<?php $j=$j+1;?>
-      </td>
+		  </td>
 
-  	  <?php } ?>
+  	  <?php endfor; ?>
     </tr>
   </tbody>
 </table>
