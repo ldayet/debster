@@ -5,8 +5,6 @@
 <?php for_logged(); ?>
 
 
-    <?php if(isset($_GET['id']) && id_exists($_GET['id']) && id_in_group($id,$_GET['id'])): ?>
-
 
 <?php if(isset($_GET['id']) && id_exists($_GET['id']) && id_in_group($id,$_GET['id'])): ?>
 <?php 
