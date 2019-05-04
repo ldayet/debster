@@ -7,10 +7,14 @@
 
     <?php if(isset($_GET['id']) && id_exists($_GET['id']) && id_in_group($id,$_GET['id'])): ?>
 
-        <?php 
-        $id_g = $_GET['id'];
-        $group = groupe_avec_id_g($id_g); 
-        ?>
+
+<?php if(isset($_GET['id']) && id_exists($_GET['id']) && id_in_group($id,$_GET['id'])): ?>
+<?php 
+$id_g = $_GET['id'];
+$group = groupe_avec_id_g($id_g); 
+
+?>
+
 
 
 

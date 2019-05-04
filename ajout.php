@@ -58,7 +58,7 @@ if (isset($_POST['friends']) && isset($_POST['montant']) && isset($_POST['titre'
      </div>
 
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Ajouter</button>
   </fieldset>
 </form>
 
