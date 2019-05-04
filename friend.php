@@ -2,7 +2,39 @@
 
 <?php include("includes/navbar.php"); ?>
 
-<?php for_logged(); ?>
+<?php for_logged(); 
+$mon_id = get_session_id();
+if (isset($_GET['id_ami'])){
+	$id_ami = $_GET['id_ami'];
+}
+if (isset($_GET['action'])){
+  $action = $_GET['action'];
+
+  if($action == 5){?>
+  	<div class="alert alert-danger" role="alert">
+  		<h4 class="alert-heading">Attention!</h4>
+  		<p>Etes vous sûr de vouloir supprimer <?php echo prenom_m_avec_id_m($id_ami); ?> de votre liste d'amis?</p>
+  		<hr>
+  		<?php
+    	echo "<p><a href=\"friend.php?id_ami=$id_ami&amp;action=9\"><button type=\"button\" class=\"btn btn-outline-light\">Confirmer</button></a> <a href=\"friend.php?id_ami=$id_ami&amp;action=10\"><button type=\"button\" class=\"btn btn-outline-light\">Annuler</button></a></p>";
+   		?>
+		</div>
+<?php }
+
+	if($action == 9){
+        echo "<div class=\"alert alert-success\" role=\"alert\">";
+          echo "<h4 class=\"alert-heading\">Amis supprimé</h4>";
+          supprimer_amis($mon_id, $id_ami);
+        echo "</div>";
+	 }
+
+	if($action == 10){
+        echo "<div class=\"alert alert-danger\" role=\"alert\">";
+          echo "<h4 class=\"alert-heading\">Amis non supprimé</h4>";
+        echo "</div>";
+	 }
+
+} ?>
 
 <div class="jumbotron">
   <h1 class="display-4"><center>Ma liste d'amis</center></h1>
@@ -66,7 +98,7 @@
 		  </td>
 		  <td class="mdl-data-table__cell--non-numeric">      	
 		  	<?php 
-		  	echo "<a href=\"delete_friend.php?id_ami=$id\">";
+		  	echo "<a href=\"friend.php?id_ami=$id&amp;action=5\">";
 		  	echo '<img src="images/delete-button.svg" height=60%></a>';
 		  	echo "</a>";?>
 		  	<?php $j=$j+1;?>
