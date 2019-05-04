@@ -141,7 +141,7 @@ function mdp_m_avec_id_m($id)
     mysqli_close($bdd);
 }
 
-function liste_amis1($id, $i)
+function liste_amis($id)
 {
   $bdd = bdd_connexion();
   $requete = mysqli_query($bdd, "SELECT * FROM membres");
@@ -154,9 +154,9 @@ function liste_amis1($id, $i)
        }
     }
     #on convertie cette chaine de caractère en tableau
-    $tab_amis = explode("|", $char_amis);
+    $tab_amis = array_values(array_filter(explode("|", $char_amis)));
     mysqli_close($bdd);
-    return $tab_amis[$i];
+    return $tab_amis;
 }
 
 function nb_amis($id)
@@ -536,34 +536,6 @@ function for_not_logged(){
 
 }
 
-#une fonction qui affiche la liste d'amis
-function liste_amis($id)
-{
-  $bdd = bdd_connexion();
-	$requete = mysqli_query($bdd, "SELECT * FROM membres");
-	while ($donnees = mysqli_fetch_assoc($requete))
-    {
-       if  ($donnees['id_m'] == $id)
-       {
-       		#on recupere la chaine de charactere de la colonne "amis"
-       		$char_amis = $donnees['amis_m'];
-       }
-    }
-    #on convertie cette chaine de caractère en tableau
-    $tab_amis = explode("|", $char_amis);
-    $i = 0;
-    echo "<table class='table table-striped'><thead><tr><th scope='col'>Nom</th><th scope='col'>Prénom</th><th scope='col'>Vous doit</th><th scope='col'>Vous lui devez</th><th scope='col'>Balance</th></tr></thead>";
-    echo "<tbody>";
-    while ($i<sizeof($tab_amis))
-    {
-    	$prenom_amis = prenom_m_avec_id_m($tab_amis[$i]);
-    	$nom_amis = nom_m_avec_id_m($tab_amis[$i]);
-    	echo "<tr><td>".$nom_amis."</td><td>".$prenom_amis."</td><td>".dette_ami($id, $tab_amis[$i])."</td><td>".creance_ami($id, $tab_amis[$i])."</td><td>".-balance_ami($id, $tab_amis[$i])."</td></tr>";
-    	$i = $i +1;
-    }
-    echo "</tbody></table>";
-
-}
  
 function check_box_amis($id){
   $bdd = bdd_connexion();
@@ -706,11 +678,11 @@ return False;
 function dettes_groupe($id,$id_g)
 {
   $bdd = bdd_connexion();
-  $requete = mysqli_query($bdd, "SELECT * FROM transactions WHERE id_dest LIKE '%|$id|%'");
+  $requete = mysqli_query($bdd, "SELECT * FROM transactions WHERE id_groupe = $id_g ");
   $dette = 0;
   while ($donnees = mysqli_fetch_assoc($requete))
   {
-    if  ($donnees['statut_t'] == 'ouvert' && $donnees['id_groupe'] == $id_g)
+    if  ($donnees['statut_t'] == 'ouvert')
     {
       $dette = $dette + $donnees['montant_t'];
     }
