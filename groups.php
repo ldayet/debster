@@ -10,6 +10,7 @@
 <?php 
 $id_g = $_GET['id'];
 $group = groupe_avec_id_g($id_g); 
+
 ?>
 
 <div class="jumbotron">
